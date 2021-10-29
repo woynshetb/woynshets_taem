@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Admin/adminOrderCard.dart';
-import 'Config/config.dart';
+import '../Admin/adminOrderCard.dart';
+import '../Config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Widgets/loadingWidget.dart';
@@ -11,11 +11,9 @@ class AdminShiftOrders extends StatefulWidget {
   _MyOrdersState createState() => _MyOrdersState();
 }
 
-
 class _MyOrdersState extends State<AdminShiftOrders> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-    );
+    return SafeArea();
   }
 }

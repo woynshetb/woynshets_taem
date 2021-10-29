@@ -1,8 +1,8 @@
-import 'Admin/adminLogin.dart';
-import 'Widgets/customTextField.dart';
-import 'DialogBox/errorDialog.dart';
-import 'DialogBox/loadingDialog.dart';
-import 'Config/config.dart';
+import '../Admin/adminLogin.dart';
+import '../Widgets/customTextField.dart';
+import '../DialogBox/errorDialog.dart';
+import '../DialogBox/loadingDialog.dart';
+import '../Config/config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
-import 'Config/config.dart';
-import 'Store/storehome.dart';
-import 'Counters/cartitemcounter.dart';
+import '../Config/config.dart';
+import '../Store/storehome.dart';
+import '../Counters/cartitemcounter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

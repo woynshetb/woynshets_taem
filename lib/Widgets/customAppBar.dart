@@ -1,5 +1,5 @@
-import 'Store/cart.dart';
-import 'Counters/cartitemcounter.dart';
+import '../Store/cart.dart';
+import '../Counters/cartitemcounter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

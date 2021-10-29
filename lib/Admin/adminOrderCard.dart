@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Admin/adminOrderDetails.dart';
-import 'Models/item.dart';
+import '../Admin/adminOrderDetails.dart';
+import '../Models/item.dart';
 import 'package:flutter/material.dart';
 
 import '../Store/storehome.dart';
