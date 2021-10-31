@@ -10,7 +10,7 @@ AppBar homeAppBar(BuildContext context) {
       text: TextSpan(
         style: Theme.of(context)
             .textTheme
-            .title
+            .subtitle1
             .copyWith(fontWeight: FontWeight.bold),
         children: [
           TextSpan(
