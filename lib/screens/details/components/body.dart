@@ -52,7 +52,7 @@ class ItemInfo extends StatelessWidget {
             onRatingChanged: (value) {},
           ),
           Text(
-            "well prepared chills by Kaldis mshdbrshdbrgsdbrgflsdrgfvfdfbgbbbbbbbbbbbbbbvvvvvvvvvvvvvvvvvvvjbdrjblsdjfbvfbvrbsbdfhslfrbdfvh",
+            "well prepared chills powder by Kaldis Baltna . you can use with fish , row meat  ",
             style: TextStyle(
               height: 1.5,
             ),
