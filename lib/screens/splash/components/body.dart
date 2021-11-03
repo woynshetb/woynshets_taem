@@ -71,7 +71,8 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Skip",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        // Navigator.pushNamed(context, SignInScreen.routeName);
+                        Navigator.of(context).push(_animatedRoute());
                       },
                     ),
                     Spacer(),
@@ -99,4 +100,21 @@ class _BodyState extends State<Body> {
       ),
     );
   }
+}
+
+Route _animatedRoute() {
+  return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => SignInScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 5.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+        final tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      });
 }
