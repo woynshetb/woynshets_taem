@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "77874646293",
+    "project_id": "woynshttaste",
+    "storage_bucket": "woynshttaste.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77874646293:android:2a37219407a6fc0f1dad1c",
+        "android_client_info": {
+          "package_name": "com.example.woynshet_taem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77874646293-b2di37up63bvtgdcs0ne91a6am5a5c1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtI2U4zPF9raqa402iFrUlWDlWBqxNyBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77874646293-b2di37up63bvtgdcs0ne91a6am5a5c1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
