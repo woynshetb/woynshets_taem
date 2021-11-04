@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:woynshet_taem/Config/config.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
@@ -73,7 +74,9 @@ class _BodyState extends State<Body> {
                       text: "Skip",
                       press: () {
                         // Navigator.pushNamed(context, SignInScreen.routeName);
-                        Navigator.of(context).push(_animatedRoute());
+                        if (EcommerceApp.auth.currentUser != null) {
+                          Navigator.of(context).push(_animatedRoute());
+                        }
                       },
                     ),
                     Spacer(),
