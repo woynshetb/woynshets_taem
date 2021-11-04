@@ -66,33 +66,7 @@ class _SignFormState extends State<SignForm> {
                 )),
           ),
           SizedBox(
-            height: getProportionateScreenHeight(30),
-          ),
-          Row(
-            children: [
-              Checkbox(
-                  value: remember,
-                  activeColor: kPrimaryColor,
-                  onChanged: (value) {
-                    setState(() {
-                      remember = value;
-                    });
-                  }),
-              Text("Remember me"),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
-                },
-                child: Text(
-                  "forget password ?",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              ),
-              SizedBox(
-                height: SizeConfig.screenHeight * 0.09,
-              ),
-            ],
+            height: getProportionateScreenHeight(20),
           ),
           DefaultButton(
             text: "Continue",
@@ -109,7 +83,28 @@ class _SignFormState extends State<SignForm> {
               // _formkey.currentState.save();
               // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
             },
-          )
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+                },
+                child: Text(
+                  "Forget password?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.orangeAccent,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );

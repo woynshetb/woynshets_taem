@@ -33,38 +33,11 @@ class Body extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.screenHeight * 0.01,
                 ),
-                Text(
-                  "Sign in with your email and password \nor continue with social media",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: "Chiret", color: Colors.black),
-                ),
+                Image.asset("assets/images/login.png"),
                 SizedBox(
                   height: SizeConfig.screenHeight * 0.05,
                 ),
                 SignForm(),
-                SizedBox(
-                  height: SizeConfig.screenHeight * 0.08,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialCard(
-                      icon: "assets/icons/gmail.png",
-                      press: () {
-                        // impment  gmail authentication
-                      },
-                    ),
-                    SocialCard(
-                      icon: "assets/icons/f.png",
-                      press: () {
-                        // implment facebook authentication
-                      },
-                    ),
-                    SocialCard(icon: "assets/icons/insta.png", press: () {}
-                        // implemnt instgram authentication
-                        ),
-                  ],
-                ),
                 SizedBox(
                   height: getProportionateScreenHeight(20),
                 ),

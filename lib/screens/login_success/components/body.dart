@@ -19,12 +19,14 @@ class Body extends StatelessWidget {
         Text(
           "Login Success",
           style: TextStyle(
-            fontSize: getProportionateScreenHeight(30),
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+              fontSize: getProportionateScreenHeight(30),
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontFamily: "Overlock"),
         ),
-        Spacer(),
+        SizedBox(
+          height: 50,
+        ),
         SizedBox(
           width: SizeConfig.screenWidth * 0.6,
           child: DefaultButton(

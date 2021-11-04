@@ -8,12 +8,6 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text(
-          "Sign in",
-          textAlign: TextAlign.center,
-        ),
-      ),
       body: Body(),
     );
   }

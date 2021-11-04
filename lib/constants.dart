@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Colors.brown;
+const kPrimaryColor = Color(0xffF9A826);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 
 const KPrimaryGradientColor = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFFFA53E), Color(0xFFF & 643)]);
+    colors: [Color(0xffF9A826)]);
 const kSecondaryColor = Colors.black;
-const kTextColor = Colors.brown;
+const kTextColor = Colors.black;
 const kAnimationDuration = Duration(milliseconds: 200);
 final optInputDecoration = InputDecoration(
   contentPadding: EdgeInsets.symmetric(vertical: 15),

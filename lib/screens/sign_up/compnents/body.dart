@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: SizeConfig.screenHeight * 0.02,
+              height: SizeConfig.screenHeight * 0.08,
             ),
             Text(
               "Register Account",
@@ -30,38 +30,12 @@ class Body extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            Text(
-              "Complete your detail or continue \n with social medias",
-              textAlign: TextAlign.center,
-            ),
             SizedBox(
               height: SizeConfig.screenHeight * 0.07,
             ),
             SignUpForm(),
             SizedBox(
               height: SizeConfig.screenHeight * 0.07,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SocialCard(
-                  icon: "assets/icons/f.png",
-                  press: () {},
-                ),
-                SocialCard(
-                  icon: "assets/icons/f.png",
-                  press: () {},
-                ),
-                SocialCard(
-                  icon: "assets/icons/f.png",
-                  press: () {},
-                ),
-              ],
-            ),
-            Text(
-              "By continuing your confirm that you agree \nwith our Term and Condition",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.caption,
             ),
           ],
         ),
