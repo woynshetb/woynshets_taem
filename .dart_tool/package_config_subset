@@ -1,3 +1,7 @@
+archive
+2.12
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/archive-3.1.6/
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/archive-3.1.6/lib/
 async
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/async-2.5.0/
@@ -34,6 +38,10 @@ collection
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/collection-1.15.0/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/collection-1.15.0/lib/
+crypto
+2.12
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/crypto-3.0.1/
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/crypto-3.0.1/lib/
 cupertino_icons
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/cupertino_icons-1.0.3/
@@ -110,6 +118,10 @@ http_parser
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/http_parser-4.0.0/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/http_parser-4.0.0/lib/
+image
+2.12
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/image-3.0.8/
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/image-3.0.8/lib/
 intl
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/intl-0.17.0/
@@ -146,6 +158,10 @@ pedantic
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/pedantic-1.11.1/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/pedantic-1.11.1/lib/
+petitparser
+2.12
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/petitparser-4.1.0/
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/petitparser-4.1.0/lib/
 platform
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/platform-3.0.2/
@@ -226,6 +242,10 @@ xdg_directories
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/xdg_directories-0.2.0/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/xdg_directories-0.2.0/lib/
+xml
+2.12
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/xml-5.1.2/
+file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/xml-5.1.2/lib/
 sky_engine
 2.12
 file:///C:/Source/flutter/bin/cache/pkg/sky_engine/

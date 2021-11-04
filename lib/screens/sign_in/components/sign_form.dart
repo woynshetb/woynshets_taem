@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:woynshet_taem/Config/config.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/forgot_password/forgot_password.dart';
@@ -98,9 +99,11 @@ class _SignFormState extends State<SignForm> {
             press: () {
               setState(() {
                 Timer(Duration(seconds: 2), () async {
-                  Route route =
-                      MaterialPageRoute(builder: (_) => LoginSuccessScreen());
-                  Navigator.pushReplacement(context, route);
+                  if (await EcommerceApp.collectionUser != null) {
+                    Route route =
+                        MaterialPageRoute(builder: (_) => LoginSuccessScreen());
+                    Navigator.pushReplacement(context, route);
+                  }
                 });
               });
               // _formkey.currentState.save();

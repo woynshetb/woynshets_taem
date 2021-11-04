@@ -21,11 +21,6 @@ class _BodyState extends State<Body> {
       "image": "assets/images/abro.jpg"
     },
     {"text": "Save your Precious time", "image": "assets/images/gize.jpg"},
-    {
-      "text":
-          "Woynshet's taste here is here to \n help you and your family to get \n your favorite sauce",
-      "image": "assets/images/abro.jpg"
-    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -74,9 +69,8 @@ class _BodyState extends State<Body> {
                       text: "Skip",
                       press: () {
                         // Navigator.pushNamed(context, SignInScreen.routeName);
-                        if (EcommerceApp.auth.currentUser != null) {
-                          Navigator.of(context).push(_animatedRoute());
-                        }
+
+                        Navigator.of(context).push(_animatedRoute());
                       },
                     ),
                     Spacer(),
