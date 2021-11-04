@@ -25,10 +25,10 @@ class Body extends StatelessWidget {
                 Text(
                   "Welcome back",
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: getProportionateScreenWidth(30),
-                    fontWeight: FontWeight.bold,
-                  ),
+                      color: Colors.black,
+                      fontSize: getProportionateScreenWidth(30),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Overlock"),
                 ),
                 SizedBox(
                   height: SizeConfig.screenHeight * 0.01,
@@ -36,6 +36,7 @@ class Body extends StatelessWidget {
                 Text(
                   "Sign in with your email and password \nor continue with social media",
                   textAlign: TextAlign.center,
+                  style: TextStyle(fontFamily: "Chiret", color: Colors.black),
                 ),
                 SizedBox(
                   height: SizeConfig.screenHeight * 0.05,
@@ -48,17 +49,20 @@ class Body extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SocialCard(
-                      icon: "assets/icons/mail.png",
-                      press: () {},
+                      icon: "assets/icons/gmail.png",
+                      press: () {
+                        // impment  gmail authentication
+                      },
                     ),
                     SocialCard(
                       icon: "assets/icons/f.png",
-                      press: () {},
+                      press: () {
+                        // implment facebook authentication
+                      },
                     ),
-                    SocialCard(
-                      icon: "assets/icons/mail.png",
-                      press: () {},
-                    ),
+                    SocialCard(icon: "assets/icons/insta.png", press: () {}
+                        // implemnt instgram authentication
+                        ),
                   ],
                 ),
                 SizedBox(
