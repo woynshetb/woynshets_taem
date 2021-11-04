@@ -19,11 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     Body(),
     Text(
-      'Index 1: Business',
+      ' cart',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'profile',
       style: optionStyle,
     ),
   ];
