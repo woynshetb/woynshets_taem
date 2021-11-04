@@ -18,17 +18,18 @@ class SplashContent extends StatelessWidget {
           height: 40,
         ),
         Text(
-          "የወይንእሸት ጣእም",
+          "የወይንእሸት ጣዕም",
           style: TextStyle(
-            fontSize: getProportionateScreenWidth(30),
-            color: Colors.orange,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: getProportionateScreenWidth(30),
+              color: Colors.orange,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Kiros"),
         ),
         Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, color: Colors.black),
+          style: TextStyle(
+              fontSize: 20, color: Colors.black, fontFamily: "Chiret"),
         ),
         SizedBox(
           height: 12,

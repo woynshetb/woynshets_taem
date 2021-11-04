@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Colors.orange;
+const kPrimaryColor = Colors.brown;
 const kPrimaryLightColor = Color(0xFFFFECDF);
 
 const KPrimaryGradientColor = LinearGradient(

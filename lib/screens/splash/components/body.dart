@@ -16,8 +16,8 @@ class _BodyState extends State<Body> {
   List<Map<String, String>> splashData = [
     {
       "text":
-          "Avoid being in crowed to buy what \nyou and your family wants \neasily",
-      "image": "assets/images/girl2.jpg"
+          "Avoid crowds while purchasing items \n for yourself and your family.",
+      "image": "assets/images/abro.jpg"
     },
     {"text": "Save your Precious time", "image": "assets/images/gize.jpg"},
     {

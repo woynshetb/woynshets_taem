@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
@@ -94,8 +96,15 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
             text: "Continue",
             press: () {
+              setState(() {
+                Timer(Duration(seconds: 2), () async {
+                  Route route =
+                      MaterialPageRoute(builder: (_) => LoginSuccessScreen());
+                  Navigator.pushReplacement(context, route);
+                });
+              });
               // _formkey.currentState.save();
-              Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
             },
           )
         ],
