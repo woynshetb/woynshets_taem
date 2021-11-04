@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:woynshet_taem/constants.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -29,15 +30,15 @@ class BottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: Colors.black),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.shopping_cart, color: Colors.black),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person, color: Colors.black),
             onPressed: () {},
           ),
         ],
