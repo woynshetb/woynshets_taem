@@ -6,11 +6,6 @@ import 'package:woynshet_taem/size_config.dart';
 
 final _formkey = GlobalKey<FormState>();
 
-String email;
-String password;
-String confirm_password;
-final List<String> errors = [];
-
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,7 +15,7 @@ class Body extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: SizeConfig.screenHeight * 0.08,
+              height: SizeConfig.screenHeight * 0.01,
             ),
             Text(
               "Register Account",
