@@ -71,17 +71,17 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
             text: "Continue",
             press: () {
-              setState(() {
-                Timer(Duration(seconds: 2), () async {
-                  if (await EcommerceApp.collectionUser != null) {
-                    Route route =
-                        MaterialPageRoute(builder: (_) => LoginSuccessScreen());
-                    Navigator.pushReplacement(context, route);
-                  }
-                });
-              });
+              // setState(() {
+              //   Timer(Duration(seconds: 2), () async {
+              //     if (await EcommerceApp.collectionUser != null) {
+              //       Route route =
+              //           MaterialPageRoute(builder: (_) => LoginSuccessScreen());
+              //       Navigator.pushReplacement(context, route);
+              //     }
+              //   });
+              // });
               // _formkey.currentState.save();
-              // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              Navigator.pushNamed(context, LoginSuccessScreen.routeName);
             },
           ),
           SizedBox(
