@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
-import 'package:woynshet_taem/components/default_button.dart';
+import 'package:woynshet_taem/Widgets/customTextField.dart';
 
 class Upload extends StatefulWidget {
   @override
@@ -13,6 +11,14 @@ class Upload extends StatefulWidget {
 class _UploadState extends State<Upload> {
   TextEditingController locationController = TextEditingController();
   TextEditingController captionController = TextEditingController();
+  TextEditingController nameTextEditingController = TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController cPasswordTextEditingController =
+      TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String userImageUrl = "";
+  File imageFile;
   File file;
   final imagePicker = ImagePicker();
   bool isUploading = false;
@@ -65,81 +71,52 @@ class _UploadState extends State<Upload> {
         });
   }
 
-  Container buildCircleAvatar() {
+  Container buildCircleAvatar(_imageFileList) {
     return Container(
-      padding: EdgeInsets.all(30),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 100,
-          ),
-          CircleAvatar(
-            radius: 120,
-            backgroundImage: FileImage(File(_imageFileList.path)),
-            backgroundColor: Colors.white,
-          ),
-          SizedBox(
-            height: 70,
-          ),
-          DefaultButton(
-            text: "Continue",
-            press: () {
-              print("clicked");
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  Container buildSplashScreen() {
-    return Container(
-      //  color: Theme.of(context).accentColor.withOpacity(0.6),
-      padding: EdgeInsets.all(30),
-      margin: EdgeInsets.only(left: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 80,
+          CircleAvatar(
+            radius: 100,
+            backgroundImage: _imageFileList == null
+                ? AssetImage("assets/images/profilee.png")
+                : FileImage(File(_imageFileList.path)),
+            backgroundColor: Colors.white,
           ),
-          // CircleAvatar(
-          //   child: _imageFileList == null
-          //       ? Icon(Icons.person)
-          //       : Image.file(
-          //           File(_imageFileList.path),
-          //         ),
-          // ),
-          Image.asset(
-            "assets/images/profilee.png",
-            height: 260.0,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: RaisedButton(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(80),
-              ),
-              child: Text(
-                "Upload Profile Picture",
-                style: TextStyle(fontSize: 22.0, color: Colors.orange),
+          ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.orange,
+                onPrimary: Colors.white,
+                onSurface: Colors.grey,
               ),
               onPressed: () {
                 selectImage(context);
               },
-            ),
-          ),
-          // Image.file(
-          //   File(_imageFileList.path),
-          // ),
+              icon: Icon(Icons.camera_alt_rounded),
+              label: Text("Upload Profile Picture")),
         ],
       ),
     );
   }
 
+//  _imageFileList == null ? buildSplashScreen() : buildCircleAvatar();
   @override
   Widget build(BuildContext context) {
-    return _imageFileList == null ? buildSplashScreen() : buildCircleAvatar();
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Container(
+          height: 400,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildCircleAvatar(_imageFileList),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
