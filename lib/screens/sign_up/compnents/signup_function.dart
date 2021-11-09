@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+// class and function to create new user
 class SignUpForm extends StatefulWidget {
   SignUpForm({
     this.name,

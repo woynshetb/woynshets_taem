@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO this class checks the email and password for the existing member
+//function to autenticate existing member
 class SignInFunc extends StatefulWidget {
   SignInFunc({this.email, this.password});
   String email;
