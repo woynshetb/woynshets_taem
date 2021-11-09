@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:woynshet_taem/Widgets/customTextField.dart';
+import 'package:woynshet_taem/components/default_button.dart';
+import './form.dart';
 
 class Upload extends StatefulWidget {
   @override
@@ -9,14 +11,14 @@ class Upload extends StatefulWidget {
 }
 
 class _UploadState extends State<Upload> {
-  TextEditingController locationController = TextEditingController();
-  TextEditingController captionController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController mobileTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController cPasswordTextEditingController =
       TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String pass;
   String userImageUrl = "";
   File imageFile;
   File file;
@@ -78,7 +80,7 @@ class _UploadState extends State<Upload> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 100,
+            radius: 80,
             backgroundImage: _imageFileList == null
                 ? AssetImage("assets/images/profilee.png")
                 : FileImage(File(_imageFileList.path)),
@@ -100,21 +102,100 @@ class _UploadState extends State<Upload> {
     );
   }
 
-//  _imageFileList == null ? buildSplashScreen() : buildCircleAvatar();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        child: Container(
-          height: 400,
-          margin: EdgeInsets.all(10),
-          padding: EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildCircleAvatar(_imageFileList),
-            ],
-          ),
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            buildCircleAvatar(_imageFileList),
+            Text(
+              _imageFileList == null ? "no file" : _imageFileList.path,
+              style: TextStyle(fontSize: 5),
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomeTextField(
+                    controller: nameTextEditingController,
+                    data: Icons.person,
+                    isObsecure: false,
+                    hintText: "Enter Full name",
+                    val: (controller) {
+                      if (controller == null || controller.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                  ),
+                  CustomeTextField(
+                    controller: emailTextEditingController,
+                    data: Icons.mail,
+                    isObsecure: false,
+                    hintText: "Enter Your email",
+                    val: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter  email';
+                      }
+                      return null;
+                    },
+                  ),
+                  CustomeTextField(
+                    controller: mobileTextEditingController,
+                    data: Icons.phone,
+                    isObsecure: false,
+                    hintText: "Phone in Standard form",
+                    val: (controller) {
+                      if (controller == null || controller.isEmpty) {
+                        return 'Please enter phone';
+                      }
+                      return null;
+                    },
+                  ),
+                  CustomeTextField(
+                    controller: passwordTextEditingController,
+                    data: Icons.lock,
+                    isObsecure: true,
+                    hintText: "Enter password",
+                  ),
+                  CustomeTextField(
+                      controller: cPasswordTextEditingController,
+                      data: Icons.lock,
+                      isObsecure: true,
+                      hintText: "Confirm password",
+                      val: (val) {
+                        if (val.isEmpty) return 'Empty';
+                        if (val != passwordTextEditingController.text)
+                          return 'Not Match';
+                        return null;
+                      }),
+                  DefaultButton(
+                    text: "Next",
+                    press: () {
+                      if (_formKey.currentState.validate()) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpForm(
+                                      name: nameTextEditingController.text,
+                                      email: emailTextEditingController.text,
+                                      phone: mobileTextEditingController.text,
+                                      password:
+                                          cPasswordTextEditingController.text,
+                                      image: _imageFileList,
+                                    )));
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
