@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:woynshet_taem/Widgets/customTextField.dart';
 import 'package:woynshet_taem/components/default_button.dart';
-import './form.dart';
+import './signup_function.dart';
 
 class Upload extends StatefulWidget {
   @override

@@ -1,6 +1,4 @@
 import 'dart:ui';
-
-import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -25,7 +23,6 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
-    FileImage path;
     return Scaffold(
       body: Container(
         child: Column(children: [

@@ -1,10 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:woynshet_taem/Config/config.dart';
+
+import 'package:woynshet_taem/Widgets/customTextField.dart';
 import 'package:woynshet_taem/components/default_button.dart';
-import 'package:woynshet_taem/constants.dart';
+
 import 'package:woynshet_taem/screens/forgot_password/forgot_password.dart';
+import 'package:woynshet_taem/screens/sign_in/components/signin_function.dart';
 import 'package:woynshet_taem/size_config.dart';
 
 import '../../login_success/login_success.dart';
@@ -17,71 +17,56 @@ class SignForm extends StatefulWidget {
 class _SignFormState extends State<SignForm> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController eEmailTextEditingController = TextEditingController();
+    TextEditingController ePassTextEditingController = TextEditingController();
     final _formkey = GlobalKey<FormState>();
 
-    String email;
-    String password;
-    bool remember = false;
-
-    final List<String> errors = [];
     return Form(
       key: _formkey,
       child: Column(
         children: [
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue,
-            validator: (value) {
-              if (value.isEmpty) {
-                setState(() {
-                  errors.add("please enter your email");
-                });
+          CustomeTextField(
+            controller: eEmailTextEditingController,
+            data: Icons.mail,
+            hintText: "ENTER EMAIL",
+            isObsecure: false,
+            val: (controller) {
+              if (controller == null || controller.isEmpty) {
+                return 'email';
               }
               return null;
             },
-            decoration: InputDecoration(
-                labelText: "Email",
-                hintText: "Enter your email",
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                // suffixIcon: SvgPicture.asset("assets/icons/Mail.jpg"),
-                suffixIcon: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                  child: Icon(Icons.mail),
-                )),
           ),
           SizedBox(
             height: getProportionateScreenHeight(30),
           ),
-          TextFormField(
-            obscureText: true,
-            onSaved: (newValue) => password = newValue,
-            decoration: InputDecoration(
-                labelText: "password",
-                hintText: "Enter your password",
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                // suffixIcon: SvgPicture.asset("assets/icons/Mail.jpg"),
-                suffixIcon: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                  child: Icon(Icons.lock),
-                )),
+          CustomeTextField(
+            controller: ePassTextEditingController,
+            data: Icons.lock_outline,
+            hintText: "ENTER PASSWORD",
+            isObsecure: true,
+            val: (controller) {
+              if (controller == null || controller.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
           ),
           SizedBox(
             height: getProportionateScreenHeight(20),
           ),
           DefaultButton(
-            text: "Continue",
+            text: "Login",
             press: () {
-              // setState(() {
-              //   Timer(Duration(seconds: 2), () async {
-              //     if (await EcommerceApp.collectionUser != null) {
-              //       Route route =
-              //           MaterialPageRoute(builder: (_) => LoginSuccessScreen());
-              //       Navigator.pushReplacement(context, route);
-              //     }
-              //   });
-              // });
-              // _formkey.currentState.save();
-              Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SignInFunc(
+                            email: eEmailTextEditingController.text,
+                            password: ePassTextEditingController.text,
+
+                            // go to login success page
+                          )));
             },
           ),
           SizedBox(
