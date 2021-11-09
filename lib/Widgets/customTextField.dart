@@ -6,9 +6,10 @@ class CustomeTextField extends StatelessWidget {
   IconData data;
   String hintText;
   bool isObsecure = true;
+  Function val;
 
   CustomeTextField(
-      {this.controller, this.data, this.hintText, this.isObsecure});
+      {this.controller, this.data, this.hintText, this.isObsecure, this.val});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,9 +18,10 @@ class CustomeTextField extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      padding: EdgeInsets.all(5),
-      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(3),
+      margin: EdgeInsets.all(7),
       child: TextFormField(
+        validator: val,
         controller: controller,
         obscureText: isObsecure,
         cursorColor: Theme.of(context).primaryColor,

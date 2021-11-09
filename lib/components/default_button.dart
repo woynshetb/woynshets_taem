@@ -9,7 +9,7 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: 200,
       height: getProportionateScreenHeight(40),
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
