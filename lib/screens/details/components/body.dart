@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
-
 import 'package:woynshet_taem/screens/details/components/item_image.dart';
 import 'package:woynshet_taem/screens/details/components/order_button.dart';
 import 'package:woynshet_taem/screens/details/components/title_price_rating.dart';
