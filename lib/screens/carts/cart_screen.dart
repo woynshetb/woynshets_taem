@@ -55,14 +55,6 @@ class CheckOurCard extends StatelessWidget {
                     color: kPrimaryColor,
                   ),
                 ),
-                Spacer(),
-                Text("Add Voucher code"),
-                const SizedBox(width: 10),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12,
-                  color: kTextColor,
-                )
               ],
             ),
             SizedBox(

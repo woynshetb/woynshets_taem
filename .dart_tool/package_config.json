@@ -182,6 +182,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_cart",
+      "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/flutter_cart-0.0.5+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "flutter_plugin_android_lifecycle",
       "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn%2547/flutter_plugin_android_lifecycle-2.0.4",
       "packageUri": "lib/",
@@ -434,7 +440,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-11-06T08:11:57.734861Z",
+  "generated": "2021-11-10T12:43:19.349998Z",
   "generator": "pub",
   "generatorVersion": "2.12.3"
 }

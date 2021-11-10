@@ -108,6 +108,9 @@ class ItemInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.1),
+
+          // give add to cart function
+
           OrderButton(
             size: size,
             press: () => Navigator.pushNamed(context, CartScreen.routeName),
