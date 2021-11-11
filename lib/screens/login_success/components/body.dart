@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:woynshet_taem/screens/home/home-screen.dart';
-import 'package:woynshet_taem/screens/newHome/newHome.dart';
+import 'package:woynshet_taem/screens/home/components/newHome.dart';
 
 import '../../../components/default_button.dart';
 import '../../../size_config.dart';
