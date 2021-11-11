@@ -182,8 +182,20 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_cart",
+      "rootUri": "file:///opt/TOOLS/DART_LANG/flutter2.2.3/.pub-cache/hosted/pub.dartlang.org/flutter_cart-0.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_plugin_android_lifecycle",
       "rootUri": "file:///opt/TOOLS/DART_LANG/flutter2.2.3/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_slidable",
+      "rootUri": "file:///opt/TOOLS/DART_LANG/flutter2.2.3/.pub-cache/hosted/pub.dartlang.org/flutter_slidable-0.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -428,7 +440,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-11-09T18:15:42.070642Z",
+  "generated": "2021-11-11T06:47:01.153806Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }
