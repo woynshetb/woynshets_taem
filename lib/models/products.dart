@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Product {
   String title;
   double price;

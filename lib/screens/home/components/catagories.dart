@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:woynshet_taem/models/products.dart';
+import 'package:woynshet_taem/models/product.dart';
 import './prduct_detail.dart';
 import '../../../providers/product_provider.dart';
 
@@ -38,21 +38,27 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
               mainAxisSpacing: 15,
               childAspectRatio: 0.8,
               children: [
-                ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return _buildCard(
-                        title: products[index].title,
-                        price: products[index].price,
-                        desc: products[index].description,
-                        cat: "Woynshet Taem",
-                        shopeName: "Woynshet Store",
-                        imgPath: "assets/images/mitmita.jpg",
-                        //products[index].image_url,
-                        added: false,
-                        isFavorite: false,
-                        context: context);
-                  },
+                GridView.count(
+                  crossAxisCount: 2,
+                  children: [
+                    ListView.builder(
+                      itemCount: products.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return _buildCard(
+                            id: products[index].id,
+                            title: products[index].title,
+                            price: products[index].price,
+                            desc: products[index].description,
+                            cat: products[index].category,
+                            shopeName: "Woynshet Store",
+                            imgPath: "assets/images/mitmita.jpg",
+                            //products[index].image_url,
+                            added: false,
+                            isFavorite: false,
+                            context: context);
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -63,6 +69,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
   }
 
   Widget _buildCard({
+    int id,
     String title,
     String desc,
     double price,
