@@ -9,11 +9,11 @@ class ProductProvider {
   static Future<List<Product>> fetchProducts() async {
     List<Product> products = [];
     final response = await http.get(Uri.parse(BASE_URL + '/products'));
-    // print(response);
+    //print(response);
     if (response.statusCode == 200) {
       final decoded = await json.decode(response.body);
 
-      // print(decoded);
+      print(decoded);
       decoded.forEach((p) {
         print(p);
         var product = new Product(
@@ -35,6 +35,24 @@ class ProductProvider {
   static Future<Product> findProduct(int id) async {
     final response =
         await http.get(Uri.parse(BASE_URL + '/products/' + id.toString()));
+    if (response.statusCode == 200) {
+      final decoded = await json.decode(response.body);
+      Product product = new Product(
+          id: decoded["id"],
+          title: decoded["title"],
+          price: decoded["price"],
+          category: decoded["category"],
+          description: decoded["description"],
+          image_url: decoded["image"]);
+      return product;
+    } else {
+      throw Exception("An exception occurred");
+    }
+  }
+
+  static Future<Product> findone(int val) async {
+    final response =
+        await http.get(Uri.parse(BASE_URL + '/products/' + val.toString()));
     if (response.statusCode == 200) {
       final decoded = await json.decode(response.body);
       Product product = new Product(

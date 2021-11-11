@@ -22,50 +22,36 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfffcfaf8),
-      body: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(right: 15.0),
-            width: MediaQuery.of(context).size.width - 30.0,
-            height: MediaQuery.of(context).size.height - 70.0,
-            child: GridView.count(
-              scrollDirection: Axis.vertical,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Color(0xfffcfaf8),
+        body: Container(
+          padding: EdgeInsets.only(right: 15.0),
+          width: MediaQuery.of(context).size.width - 30.0,
+          height: MediaQuery.of(context).size.height - 30.0,
+          child: GridView.builder(
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              primary: false,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 15,
-              childAspectRatio: 0.8,
-              children: [
-                GridView.count(
-                  crossAxisCount: 2,
-                  children: [
-                    ListView.builder(
-                      itemCount: products.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return _buildCard(
-                            id: products[index].id,
-                            title: products[index].title,
-                            price: products[index].price,
-                            desc: products[index].description,
-                            cat: products[index].category,
-                            shopeName: "Woynshet Store",
-                            imgPath: "assets/images/mitmita.jpg",
-                            //products[index].image_url,
-                            added: false,
-                            isFavorite: false,
-                            context: context);
-                      },
-                    ),
-                  ],
-                ),
-              ],
+              crossAxisSpacing: 2.0,
+              mainAxisSpacing: 2.0,
             ),
+            itemCount: 8,
+            itemBuilder: (BuildContext context, int index) {
+              return _buildCard(
+                  id: 12,
+                  title: "mitmita",
+                  price: 12,
+                  desc: "jggsdfsdf",
+                  cat: "bgcbbd",
+                  shopeName: "Woynshet Store",
+                  imgPath: "assets/images/mitmita.jpg",
+                  //products[index].image_url,
+                  added: false,
+                  isFavorite: false,
+                  context: context);
+            },
           ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget _buildCard({
@@ -81,7 +67,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
     context,
   }) {
     return Padding(
-      padding: EdgeInsets.only(top: 15, bottom: 5, left: 5, right: 5),
+      padding: EdgeInsets.only(top: 5, bottom: 1, left: 5, right: 5),
       child: InkWell(
         onTap: () {
           // this is how you route b/n pages ( screen) without named route

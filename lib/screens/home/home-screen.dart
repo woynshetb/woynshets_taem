@@ -5,6 +5,7 @@ import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 
 import 'package:woynshet_taem/screens/home/components/newHome.dart';
+import 'package:woynshet_taem/screens/moke.model.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
@@ -20,10 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     NewHome(),
     CartScreen(),
-    Text(
-      'profile',
-      style: optionStyle,
-    ),
+    MyApp(),
   ];
   void _onItemTapped(int index) {
     setState(() {
