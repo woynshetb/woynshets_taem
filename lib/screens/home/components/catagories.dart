@@ -40,7 +40,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
               children: [
                 ListView.builder(
                   itemCount: products.length,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     return _buildCard(
                         title: products[index].title,
                         price: products[index].price,

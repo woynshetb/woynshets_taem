@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
-//import 'package:woynshet_taem/components/bottom_nav_bar.dart';
+
 import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 
 import 'package:woynshet_taem/screens/home/components/newHome.dart';

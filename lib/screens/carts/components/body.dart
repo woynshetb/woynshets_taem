@@ -58,8 +58,6 @@ class _BodyState extends State<Body> {
                     setState(() {});
                   },
                 ),
-
-                //add more action buttons here.
               ],
             );
           }).toList(),

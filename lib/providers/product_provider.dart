@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../models/products.dart';
 import 'dart:core';
@@ -14,7 +12,8 @@ class ProductProvider {
     print(response);
     if (response.statusCode == 200) {
       final decoded = await json.decode(response.body);
-      print(decoded);
+
+      // print(decoded);
       decoded.forEach((p) {
         print(p);
         var product = new Product(
