@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/default_button.dart';
-import 'package:woynshet_taem/screens/otp/otp_screen.dart';
 
 import '../../../size_config.dart';
 
@@ -33,9 +32,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "continue",
-            press: () {
-              Navigator.pushNamed(context, OTPScreen.routName);
-            },
+            press: () {},
           ),
         ],
       ),

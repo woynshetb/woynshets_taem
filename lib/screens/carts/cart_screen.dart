@@ -7,11 +7,23 @@ import 'package:woynshet_taem/size_config.dart';
 class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
 
+  final String imagePath, shopename, title;
+  final int price;
+
+  const CartScreen(
+      {Key key, this.imagePath, this.shopename, this.title, this.price})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Body(),
+      body: Body(
+        title: title,
+        imagePath: imagePath,
+        shopeName: shopename,
+        price: price,
+      ),
       bottomNavigationBar: CheckOurCard(),
     );
   }
@@ -55,14 +67,6 @@ class CheckOurCard extends StatelessWidget {
                     color: kPrimaryColor,
                   ),
                 ),
-                Spacer(),
-                Text("Add Voucher code"),
-                const SizedBox(width: 10),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12,
-                  color: kTextColor,
-                )
               ],
             ),
             SizedBox(
