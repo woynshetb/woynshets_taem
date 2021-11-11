@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class Body extends StatefulWidget {
   final String title, imagePath, shopeName;
-  final int price;
+  final double price;
 
   const Body({Key key, this.title, this.imagePath, this.shopeName, this.price})
       : super(key: key);
@@ -71,6 +71,6 @@ class _BodyState extends State<Body> {
 
 class Cart {
   String title, imagePath, shopeName;
-  int price;
+  double price;
   Cart({this.imagePath, this.price, this.shopeName, this.title});
 }

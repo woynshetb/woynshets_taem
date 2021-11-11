@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:woynshet_taem/models/products.dart';
 import './prduct_detail.dart';
+import '../../../providers/product_provider.dart';
 
-class ProductCatagoryPage extends StatelessWidget {
+class ProductCatagoryPage extends StatefulWidget {
+  @override
+  State<ProductCatagoryPage> createState() => _ProductCatagoryPageState();
+}
+
+class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
+  List<Product> products = [];
+  @override
+  void didChangeDependencies() async {
+    final tmp = await ProductProvider.fetchProducts();
+    setState(() {
+      products = tmp;
+    });
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,46 +38,22 @@ class ProductCatagoryPage extends StatelessWidget {
               mainAxisSpacing: 15,
               childAspectRatio: 0.8,
               children: [
-                _buildCard(
-                    "Less Spicy Chill | በርበሬ",
-                    "well prepared chill powder for raw meet and fish",
-                    50,
-                    "Chills Powder",
-                    "Aberash Company",
-                    "assets/images/mitmita.jpg",
-                    false,
-                    false,
-                    context),
-                _buildCard(
-                    " Tin layer Bread | እንጀራ",
-                    "a nice enjera to eat with different souce",
-                    15,
-                    "enjera",
-                    "Kalkian Company",
-                    "assets/images/enjera.jpg",
-                    false,
-                    false,
-                    context),
-                _buildCard(
-                    "Less Spicy Chill \n      በርበሬ",
-                    "well prepared chill powder for raw meet and fish",
-                    60,
-                    "Chills Powder",
-                    "Aberash Company",
-                    "assets/images/mitmita.jpg",
-                    false,
-                    false,
-                    context),
-                _buildCard(
-                    "Less Spicy Chill \n በርበሬ",
-                    "well prepared chill powder for raw meet and fish",
-                    60,
-                    "Chills Powder",
-                    "Aberash Company",
-                    "assets/images/mitmita.jpg",
-                    false,
-                    false,
-                    context),
+                ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _buildCard(
+                        title: products[index].title,
+                        price: products[index].price,
+                        desc: products[index].description,
+                        cat: "Woynshet Taem",
+                        shopeName: "Woynshet Store",
+                        imgPath: "assets/images/mitmita.jpg",
+                        //products[index].image_url,
+                        added: false,
+                        isFavorite: false,
+                        context: context);
+                  },
+                ),
               ],
             ),
           ),
@@ -69,17 +62,17 @@ class ProductCatagoryPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(
+  Widget _buildCard({
     String title,
     String desc,
-    int price,
+    double price,
     String cat,
     String shopeName,
     String imgPath,
     bool added,
     isFavorite,
     context,
-  ) {
+  }) {
     return Padding(
       padding: EdgeInsets.only(top: 15, bottom: 5, left: 5, right: 5),
       child: InkWell(

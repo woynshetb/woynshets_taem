@@ -6,7 +6,7 @@ import './bottomNavBar.dart';
 
 class ProductDet extends StatefulWidget {
   final String assetPath, productTitle, produtDesc, catagory, shopeName;
-  final int productPrice;
+  final double productPrice;
 
   const ProductDet(
       {Key key,
@@ -59,7 +59,7 @@ class _ProductDetState extends State<ProductDet> {
 
 class ItemInfo extends StatelessWidget {
   final String title, assetPath, productTitle, produtDesc, shopename, catagory;
-  final int productPrice;
+  final double productPrice;
   ItemInfo(
       {this.title,
       this.assetPath,
@@ -153,7 +153,7 @@ class ItemImage extends StatelessWidget {
 }
 
 class TitlePriceRating extends StatelessWidget {
-  final int price;
+  final double price;
   final int numOfReviews;
   final double rating;
   final String name;
@@ -179,7 +179,7 @@ class TitlePriceRating extends StatelessWidget {
               children: <Widget>[
                 Text(
                   name,
-                  style: Theme.of(context).textTheme.headline,
+                  // style: Theme.of(context).textTheme.headline,
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -202,7 +202,7 @@ class TitlePriceRating extends StatelessWidget {
     );
   }
 
-  ClipPath priceTag(BuildContext context, {int price}) {
+  ClipPath priceTag(BuildContext context, {double price}) {
     return ClipPath(
       clipper: PricerCliper(),
       child: Container(
@@ -213,10 +213,10 @@ class TitlePriceRating extends StatelessWidget {
         color: kPrimaryColor,
         child: Text(
           "\$$price",
-          style: Theme.of(context)
-              .textTheme
-              .title
-              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+          // style: Theme.of(context)
+          //     .textTheme
+          //     .title
+          //     .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
     );

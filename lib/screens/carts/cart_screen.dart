@@ -8,7 +8,7 @@ class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
 
   final String imagePath, shopename, title;
-  final int price;
+  final double price;
 
   const CartScreen(
       {Key key, this.imagePath, this.shopename, this.title, this.price})
