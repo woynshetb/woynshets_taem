@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
-import './bottomNavBar.dart';
 
 class ProductDet extends StatefulWidget {
   final String assetPath, productTitle, produtDesc, catagory, shopeName;

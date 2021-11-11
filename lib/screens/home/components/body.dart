@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/search_box.dart';
 import 'package:woynshet_taem/constants.dart';
-import './catagories.dart';
+import 'catagories.dart';
 
 class NewHome extends StatefulWidget {
-  static String routeName = "/home";
   @override
   _NewHomeState createState() => _NewHomeState();
 }

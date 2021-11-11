@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:woynshet_taem/screens/home/components/newHome.dart';
+import 'package:woynshet_taem/screens/home/components/body.dart';
+import 'package:woynshet_taem/screens/home/home-screen.dart';
 
 import '../../../components/default_button.dart';
 import '../../../size_config.dart';
@@ -33,7 +34,7 @@ class Body extends StatelessWidget {
             text: "Go to home",
             press: () {
               // simple ui for home
-              Navigator.pushNamed(context, NewHome.routeName);
+              Navigator.pushNamed(context, HomeScreen.routeName);
               // Navigator.push(
               //     context, MaterialPageRoute(builder: (context) => NewHome()));
             },

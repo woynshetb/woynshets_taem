@@ -4,7 +4,7 @@ import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 
 import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 
-import 'package:woynshet_taem/screens/home/components/newHome.dart';
+import 'package:woynshet_taem/screens/home/components/body.dart';
 import 'package:woynshet_taem/screens/moke.model.dart';
 
 class HomeScreen extends StatefulWidget {
