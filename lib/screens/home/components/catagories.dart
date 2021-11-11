@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:woynshet_taem/models/product.dart';
-import './prduct_detail.dart';
-import '../../../providers/product_provider.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
 
 class ProductCatagoryPage extends StatefulWidget {
   @override
@@ -9,14 +11,32 @@ class ProductCatagoryPage extends StatefulWidget {
 }
 
 class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
-  List<Product> products = [];
+  // List user = [];
+  // bool isLoading = false;
+
   @override
-  void didChangeDependencies() async {
-    final tmp = await ProductProvider.fetchProducts();
-    setState(() {
-      products = tmp;
-    });
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    this.fetchProduct();
+  }
+
+  fetchProduct() async {
+    final response =
+        await http.get(Uri.parse('https://fakestoreapi.com/products'));
+
+    if (response.statusCode == 200) {
+      var items = json.decode(response.body);
+      return items;
+      // setState(() {
+      //   user = items;
+      //   print(user);
+      // });
+    } else {
+      // setState(() {
+      //   user = [];
+      // });
+      print("error");
+    }
   }
 
   @override
@@ -26,31 +46,33 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
         backgroundColor: Color(0xfffcfaf8),
         body: Container(
           padding: EdgeInsets.only(right: 15.0),
-          width: MediaQuery.of(context).size.width - 30.0,
-          height: MediaQuery.of(context).size.height - 30.0,
-          child: GridView.builder(
-            scrollDirection: Axis.vertical,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 2.0,
-              mainAxisSpacing: 2.0,
-            ),
-            itemCount: 8,
-            itemBuilder: (BuildContext context, int index) {
-              return _buildCard(
-                  id: 12,
-                  title: "mitmita",
-                  price: 12,
-                  desc: "jggsdfsdf",
-                  cat: "bgcbbd",
-                  shopeName: "Woynshet Store",
-                  imgPath: "assets/images/mitmita.jpg",
-                  //products[index].image_url,
-                  added: false,
-                  isFavorite: false,
-                  context: context);
-            },
-          ),
+          width: MediaQuery.of(context).size.width - 10.0,
+          height: MediaQuery.of(context).size.height,
+          child: FutureBuilder(
+              future: fetchProduct(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return _buildCard(
+                            id: snapshot.data[index]['id'],
+                            title: snapshot.data[index]['title'],
+                            desc: snapshot.data[index]['description'],
+                            price: snapshot.data[index]['price'],
+                            cat: snapshot.data[index]['category'],
+                            shopeName: "zenebech baltna",
+                            imgPath: snapshot.data[index]['image'],
+                            isFavorite: false,
+                            added: false,
+                            context: context);
+                      });
+                } else
+                  return CircularProgressIndicator();
+              }),
         ));
   }
 
@@ -58,7 +80,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
     int id,
     String title,
     String desc,
-    double price,
+    num price,
     String cat,
     String shopeName,
     String imgPath,
@@ -94,42 +116,30 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
               color: Colors.white),
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    isFavorite
-                        ? Icon(Icons.favorite, color: Color(0xffef7532))
-                        : Icon(
-                            Icons.favorite_border,
-                            color: Color(0xffef7532),
-                          ),
-                  ],
-                ),
+              SizedBox(
+                height: 15,
               ),
               Hero(
                 tag: imgPath,
                 child: Container(
-                  height: 75,
+                  height: 65,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                    image: AssetImage(
-                      imgPath,
-                    ),
+                    image: NetworkImage(imgPath),
                     fit: BoxFit.contain,
                   )),
                 ),
               ),
               SizedBox(
-                height: 7.0,
+                height: 4.0,
               ),
               /////
               Text(title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xffcc8053),
                     fontFamily: "Overlock",
-                    fontSize: 14,
+                    fontSize: 12,
                   )),
               Text(
                 " ${price} Birr",

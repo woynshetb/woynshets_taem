@@ -69,6 +69,7 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: [
+                // can change the screen
                 ProductCatagoryPage(),
                 ProductCatagoryPage(),
                 ProductCatagoryPage(),
