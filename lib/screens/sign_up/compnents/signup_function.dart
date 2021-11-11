@@ -1,9 +1,15 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:woynshet_taem/components/default_button.dart';
+import 'package:woynshet_taem/screens/home/home-screen.dart';
 
 // class and function to create new user
 class SignUpForm extends StatefulWidget {
+  String name;
+  String email;
+  String phone;
+  String password;
+  XFile image;
   SignUpForm({
     this.name,
     this.email,
@@ -11,11 +17,6 @@ class SignUpForm extends StatefulWidget {
     this.password,
     this.image,
   });
-  String name;
-  String email;
-  String phone;
-  String password;
-  XFile image;
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -28,29 +29,17 @@ class _SignUpFormState extends State<SignUpForm> {
       body: Container(
         child: Column(children: [
           Text(
-            widget.name,
+            "Welcome ${widget.name} click go to home page to continue",
             style: TextStyle(
               fontSize: 50,
             ),
           ),
-          Text(
-            widget.email,
-            style: TextStyle(
-              fontSize: 50,
-            ),
-          ),
-          Text(
-            widget.phone,
-            style: TextStyle(
-              fontSize: 50,
-            ),
-          ),
-          Text(
-            widget.password,
-            style: TextStyle(
-              fontSize: 50,
-            ),
-          ),
+          DefaultButton(
+            text: "Go to home",
+            press: () {
+              Navigator.pushNamed(context, HomeScreen.routeName);
+            },
+          )
         ]),
       ),
     );
