@@ -22,9 +22,9 @@ class ProductCatagoryPage extends StatelessWidget {
               childAspectRatio: 0.8,
               children: [
                 _buildCard(
-                    "Less Spicy Chill በርበሬ",
+                    "Less Spicy Chill | በርበሬ",
                     "well prepared chill powder for raw meet and fish",
-                    "${60} Birr",
+                    50,
                     "Chills Powder",
                     "Aberash Company",
                     "assets/images/mitmita.jpg",
@@ -32,19 +32,19 @@ class ProductCatagoryPage extends StatelessWidget {
                     false,
                     context),
                 _buildCard(
-                    "Less Spicy Chill \n በርበሬ",
-                    "well prepared chill powder for raw meet and fish",
-                    "${60} Birr",
-                    "Chills Powder",
-                    "Aberash Company",
-                    "assets/images/mitmita.jpg",
+                    " Tin layer Bread | እንጀራ",
+                    "a nice enjera to eat with different souce",
+                    15,
+                    "enjera",
+                    "Kalkian Company",
+                    "assets/images/enjera.jpg",
                     false,
                     false,
                     context),
                 _buildCard(
                     "Less Spicy Chill \n      በርበሬ",
                     "well prepared chill powder for raw meet and fish",
-                    "${60} Birr",
+                    60,
                     "Chills Powder",
                     "Aberash Company",
                     "assets/images/mitmita.jpg",
@@ -54,7 +54,7 @@ class ProductCatagoryPage extends StatelessWidget {
                 _buildCard(
                     "Less Spicy Chill \n በርበሬ",
                     "well prepared chill powder for raw meet and fish",
-                    "${60} Birr",
+                    60,
                     "Chills Powder",
                     "Aberash Company",
                     "assets/images/mitmita.jpg",
@@ -72,7 +72,7 @@ class ProductCatagoryPage extends StatelessWidget {
   Widget _buildCard(
     String title,
     String desc,
-    String price,
+    int price,
     String cat,
     String shopeName,
     String imgPath,
@@ -146,7 +146,7 @@ class ProductCatagoryPage extends StatelessWidget {
                     fontSize: 14,
                   )),
               Text(
-                price,
+                " ${price} Birr",
                 style: TextStyle(
                   color: Color(0xff575e67),
                   fontFamily: "Overlock",
@@ -166,14 +166,8 @@ class ProductCatagoryPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     if (!added) ...[
-                      Icon(
-                        Icons.shopping_basket,
-                        color: Color(0xffd17e50),
-                        size: 12,
-                      ),
-                      // should be a widget function that leads cart detail
                       Text(
-                        "Add to cart",
+                        "See more ...",
                         style:
                             TextStyle(color: Color(0xffd17e50), fontSize: 12.0),
                       ),

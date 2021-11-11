@@ -48,18 +48,14 @@ class _BodyState extends State<Body> {
                 ),
               ),
               secondaryActions: [
-                //action button to show on tail
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.redAccent),
                   child: Icon(Icons.delete),
                   onPressed: () {
-                    //delete action for this button
                     cart.removeWhere((element) {
                       return element.title == carts.title;
-                    }); //go through the loop and match content to delete from list
-                    setState(() {
-                      //refresh UI after deleting element from list
                     });
+                    setState(() {});
                   },
                 ),
 

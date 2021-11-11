@@ -5,12 +5,8 @@ import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 import './bottomNavBar.dart';
 
 class ProductDet extends StatefulWidget {
-  final String assetPath,
-      productPrice,
-      productTitle,
-      produtDesc,
-      catagory,
-      shopeName;
+  final String assetPath, productTitle, produtDesc, catagory, shopeName;
+  final int productPrice;
 
   const ProductDet(
       {Key key,
@@ -62,13 +58,8 @@ class _ProductDetState extends State<ProductDet> {
 }
 
 class ItemInfo extends StatelessWidget {
-  final String title,
-      assetPath,
-      productPrice,
-      productTitle,
-      produtDesc,
-      shopename,
-      catagory;
+  final String title, assetPath, productTitle, produtDesc, shopename, catagory;
+  final int productPrice;
   ItemInfo(
       {this.title,
       this.assetPath,
@@ -113,7 +104,15 @@ class ItemInfo extends StatelessWidget {
 
           OrderButton(
             size: size,
-            press: () => Navigator.pushNamed(context, CartScreen.routeName),
+            press: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CartScreen(
+                          title: title,
+                          imagePath: assetPath,
+                          price: productPrice,
+                          shopename: shopename,
+                        ))),
           ),
         ],
       ),
@@ -154,7 +153,7 @@ class ItemImage extends StatelessWidget {
 }
 
 class TitlePriceRating extends StatelessWidget {
-  final String price;
+  final int price;
   final int numOfReviews;
   final double rating;
   final String name;
@@ -203,7 +202,7 @@ class TitlePriceRating extends StatelessWidget {
     );
   }
 
-  ClipPath priceTag(BuildContext context, {String price}) {
+  ClipPath priceTag(BuildContext context, {int price}) {
     return ClipPath(
       clipper: PricerCliper(),
       child: Container(
