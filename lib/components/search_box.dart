@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:woynshet_taem/constants.dart';
 
 class SearchBox extends StatelessWidget {
-  final ValueChanged<String> onChanged;
+  final Function onChanged;
   const SearchBox({
     Key key,
     this.onChanged,
@@ -22,7 +22,7 @@ class SearchBox extends StatelessWidget {
         onChanged: (value) => print(value),
         decoration: InputDecoration(
           border: InputBorder.none,
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: IconButton(icon: Icon(Icons.search), onPressed: () {}),
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           hintText: "Search Sauce",
