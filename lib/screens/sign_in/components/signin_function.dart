@@ -1,15 +1,43 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/screens/login_success/login_success.dart';
+import 'package:http/http.dart' as http;
 
 //function to autenticate existing member and if the user is a member go to home
 class SignInFunc extends StatefulWidget {
+  final String email;
+  final String password;
   SignInFunc({this.email, this.password});
-  String email;
-  String password;
 
   @override
   _SignInFuncState createState() => _SignInFuncState();
+}
+
+// function to authenticate
+signIn(String email, String password) async {
+  var headers = {'Content-Type': 'application/json'};
+  var request = http.Request(
+      'POST', Uri.parse('https://woynshetstaem.herokuapp.com/signin'));
+
+  request.body = json.encode({
+    "email": email,
+    "password": password,
+  });
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    var decode = jsonDecode(request.body);
+    print(await response.stream.bytesToString());
+    print("user logged in");
+    print(decode['username']);
+  } else {
+    print(response.reasonPhrase);
+  }
 }
 
 class _SignInFuncState extends State<SignInFunc> {
@@ -23,8 +51,9 @@ class _SignInFuncState extends State<SignInFunc> {
             Text(widget.password),
             DefaultButton(
               text: "continue",
-              press: () {
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              press: () async {
+                await signIn(widget.email, widget.password);
+                // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               },
             )
           ],

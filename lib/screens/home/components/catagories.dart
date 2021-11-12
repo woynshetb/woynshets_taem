@@ -71,7 +71,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
                             context: context);
                       });
                 } else
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
               }),
         ));
   }
