@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/screens/authenticate/auth.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 
 import 'package:woynshet_taem/screens/home/components/app_bar.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     NewHome(),
     CartScreen(),
-    MyApp(),
+    Auth(),
   ];
   void _onItemTapped(int index) {
     setState(() {
