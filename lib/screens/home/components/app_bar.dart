@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/screens/notification/notification.dart';
+import 'package:woynshet_taem/screens/notification/history.dart';
 
 AppBar homeAppBar(BuildContext context) {
   return AppBar(

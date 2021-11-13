@@ -38,6 +38,7 @@ dependencies:
   image_picker: ^0.8.4+1
   flutter_cart: ^0.0.5+1
   flutter_slidable:
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
