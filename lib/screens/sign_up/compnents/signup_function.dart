@@ -46,6 +46,11 @@ class _SignUpFormState extends State<SignUpForm> {
       http.StreamedResponse response = await request.send();
       final responseString = await http.Response.fromStream(response);
       print(jsonDecode(responseString.body));
+      var respo = await json.decode(responseString.body);
+
+      // Todo get full user information
+
+      print(respo["data"]['_id']);
     } catch (exception) {} finally {}
   }
 
@@ -97,4 +102,17 @@ signUp() async {
     final responseString = await http.Response.fromStream(response);
     print(jsonDecode(responseString.body));
   } catch (exception) {} finally {}
+}
+
+class ProfileInfo {
+  final int id;
+
+  ProfileInfo({
+    this.id,
+  });
+  factory ProfileInfo.fromJson(Map<String, dynamic> json) {
+    return ProfileInfo(
+      id: json['id'],
+    );
+  }
 }
