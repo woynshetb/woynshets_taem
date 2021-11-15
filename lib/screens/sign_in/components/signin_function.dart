@@ -33,8 +33,9 @@ signIn(String email, String password) async {
   if (response.statusCode == 200) {
     var decode = jsonDecode(request.body);
     print(await response.stream.bytesToString());
-    print("user logged in");
-    print(decode['username']);
+    print("user have authenticated email ");
+    // search user in profile collection in database and get information for profile information
+    print(decode["email"]);
   } else {
     print(response.reasonPhrase);
   }
