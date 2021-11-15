@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/authenticate/auth.dart';
-import 'package:woynshet_taem/screens/payment/guestpayment.dart';
+
 import 'package:woynshet_taem/size_config.dart';
 import 'package:http/http.dart' as http;
 
