@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/screens/payment/payment.dart';
+import 'package:woynshet_taem/screens/authenticate/auth.dart';
+import 'package:woynshet_taem/screens/payment/guestpayment.dart';
 import 'package:woynshet_taem/size_config.dart';
 import 'package:http/http.dart' as http;
 
@@ -186,14 +187,15 @@ class CheckOurCard extends StatelessWidget {
             SizedBox(
               width: getProportionateScreenWidth(190),
               child: DefaultButton(
-                text: "Paywith BelCash",
+                text: "Checkout",
                 press: () {
+                  // this function will apply to guest
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Payment(
-                                title: desc,
-                                amount: price,
+                          builder: (context) => Auth(
+                                productName: desc,
+                                productPrice: price,
                               )));
                 },
               ),
