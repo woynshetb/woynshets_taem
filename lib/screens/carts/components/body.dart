@@ -1,15 +1,19 @@
+import 'dart:convert';
+
+import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/payment/payment.dart';
 import 'package:woynshet_taem/size_config.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
-  final String title, imagePath, shopeName;
+  final String title, imagePath;
   final double price;
 
-  const Body({Key key, this.title, this.imagePath, this.shopeName, this.price})
+  const Body({Key key, this.title, this.imagePath, this.price})
       : super(key: key);
 
   @override
@@ -19,18 +23,48 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   List<Cart> cart = [];
 
-  // add funtion to pass information and add to the list
+  // add function to pass information and add to the list
   @override
   void initState() {
     cart.add(Cart(
       imagePath: widget.imagePath,
       price: widget.price,
-      shopeName: widget.shopeName,
       title: widget.title,
     ));
 
     super.initState();
+    addTocart(
+      "userId",
+      widget.title,
+      widget.price,
+    );
   }
+
+// this doesnt work b/c it is not uploaded to heroku = b/c local host for phone and pc is not the same
+
+  addTocart(String userId, String productname, num price) async {
+    var request =
+        http.MultipartRequest('POST', Uri.parse('http://localhost:4000/cart'));
+    request.fields.addAll({
+      // for 3 status there will be user id
+      'userId': '${userId}',
+      // generate product id by using  uuid package
+      'productId': 'Taem',
+      'quantity': '1',
+      'name': '${productname}',
+    });
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+// functon to read from cart db using cart model and generate it with listviewbuilder with streambuilder ( future builder)
+  fetchFromCart() {}
 
   @override
   Widget build(BuildContext context) {

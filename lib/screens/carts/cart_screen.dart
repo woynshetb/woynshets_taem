@@ -7,11 +7,10 @@ import 'package:woynshet_taem/size_config.dart';
 class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
 
-  final String imagePath, shopename, title;
+  final String imagePath, title;
   final double price;
 
-  const CartScreen(
-      {Key key, this.imagePath, this.shopename, this.title, this.price})
+  const CartScreen({Key key, this.imagePath, this.title, this.price})
       : super(key: key);
 
   @override
@@ -21,7 +20,6 @@ class CartScreen extends StatelessWidget {
       body: Body(
         title: title,
         imagePath: imagePath,
-        shopeName: shopename,
         price: price,
       ),
     );

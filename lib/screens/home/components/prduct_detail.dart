@@ -110,7 +110,6 @@ class ItemInfo extends StatelessWidget {
                           title: title,
                           imagePath: assetPath,
                           price: productPrice,
-                          shopename: shopename,
                         ))),
           ),
         ],
