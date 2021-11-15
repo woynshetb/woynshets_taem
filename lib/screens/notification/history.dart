@@ -22,7 +22,7 @@ class _NotificationsState extends State<Notifications> {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmluY2lwYWwiOiIxMzc2NDUwIiwic3lzdGVtIjoibHVjeSIsImdyb3VwIjoiYnVzaW5lc3MiLCJ1c2VybmFtZSI6IjEzNzY0NTAiLCJjaGFpbiI6WyJwYXNzd29yZCJdLCJpYXQiOjE2MzY3Nzk3MzksImV4cCI6MTYzNjg2NjEzOX0.5pFTTybH-edlhMms8_AbWPruQPwmBwxAVsU_QMBI4Xs'
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmluY2lwYWwiOiIxMzc2NDUwIiwic3lzdGVtIjoibHVjeSIsImdyb3VwIjoiYnVzaW5lc3MiLCJ1c2VybmFtZSI6IjEzNzY0NTAiLCJjaGFpbiI6WyJwYXNzd29yZCJdLCJpYXQiOjE2MzY5Nzc3NzksImV4cCI6MTYzNzA2NDE3OX0.XloIQYe6J-nOjHseJU4uYG23Lgm2xwtFr67RwElt4iY'
     };
     var request = http.Request(
         'GET',
