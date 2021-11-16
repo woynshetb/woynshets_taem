@@ -77,7 +77,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
   }
 
   Widget _buildCard({
-    int id,
+    num id,
     String title,
     String desc,
     num price,
@@ -95,6 +95,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
           // this is how you route b/n pages ( screen) without named route
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ProductDet(
+                    productId: id,
                     assetPath: imgPath,
                     productPrice: price,
                     productTitle: title,
@@ -163,7 +164,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
                   children: [
                     if (!added) ...[
                       Text(
-                        "See more ...",
+                        "see more",
                         style:
                             TextStyle(color: Color(0xffd17e50), fontSize: 12.0),
                       ),
