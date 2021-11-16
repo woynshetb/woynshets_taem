@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/screens/home/home-screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
 
 // class and function to create new user
 class SignUpForm extends StatefulWidget {
@@ -79,6 +80,7 @@ class _SignUpFormState extends State<SignUpForm> {
             press: () {
               signUp(widget.name, widget.email, widget.phone, widget.password,
                   widget.image);
+              Navigator.pushNamed(context, SignInScreen.routeName);
             },
           ),
         ]),
