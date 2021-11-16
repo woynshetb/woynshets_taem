@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:woynshet_taem/Widgets/customTextField.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/screens/profile/profilePage.dart';
 
 class Payment extends StatefulWidget {
   final String title;
@@ -90,6 +91,11 @@ class _PaymentState extends State<Payment> {
                     phoneNumberTextEditingController.text,
                     today.add(Duration(days: 3)),
                     code.toString());
+                // go to profile page by passing id as parameter
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileScreenPage()));
               },
             )
           ],
