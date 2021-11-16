@@ -10,10 +10,11 @@ import 'package:woynshet_taem/size_config.dart';
 import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
-  final String title, imagePath;
+  final String title;
+  final num productId;
   final double price;
 
-  const Body({Key key, this.title, this.imagePath, this.price})
+  const Body({Key key, this.title, this.productId, this.price})
       : super(key: key);
 
   @override
@@ -27,44 +28,54 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     cart.add(Cart(
-      imagePath: widget.imagePath,
+      //imagePath: widget.imagePath,
       price: widget.price,
-      title: widget.title,
+      name: widget.title,
     ));
 
     super.initState();
-    addTocart(
-      "userId",
-      widget.title,
-      widget.price,
-    );
+    // addTocart(
+    //   "6192566b177824d2013a4b5a",
+    //   widget.title,
+    //   widget.price,
+    //   widget.productId,
+    // );
   }
 
-// this doesnt work b/c it is not uploaded to heroku = b/c local host for phone and pc is not the same
-
-  addTocart(String userId, String productname, num price) async {
-    var request =
-        http.MultipartRequest('POST', Uri.parse('http://localhost:4000/cart'));
-    request.fields.addAll({
-      // for 3 status there will be user id
-      'userId': '${userId}',
-      // generate product id by using  uuid package
-      'productId': 'Taem',
-      'quantity': '1',
-      'name': '${productname}',
+  addTocart(String userId, String productname, num price, num productId) async {
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request(
+        'POST', Uri.parse('https://woynshetstaem.herokuapp.com/cart'));
+    request.body = json.encode({
+      "productId": productId,
+      "name": productname,
+      "price": price,
+      "userId": userId
     });
+    request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
+      print("added");
     } else {
       print(response.reasonPhrase);
     }
   }
 
 // functon to read from cart db using cart model and generate it with listviewbuilder with streambuilder ( future builder)
-  fetchFromCart() {}
+
+  Future<Cart> fetchCart() async {
+    final response =
+        await http.get(Uri.parse('https://woynshetstaem.herokuapp.com/cart'));
+
+    if (response.statusCode == 200) {
+      return Cart.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load cart');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +87,13 @@ class _BodyState extends State<Body> {
           Column(
             children: cart.map((carts) {
               return Slidable(
-                key: Key(carts.title),
+                key: Key(carts.name),
                 actionPane: SlidableDrawerActionPane(),
                 actionExtentRatio: 0.15,
                 actions: [],
                 child: Card(
                   child: ListTile(
-                    title: Text(carts.title),
+                    title: Text(carts.name),
                     subtitle: Text(carts.price.toString()),
                   ),
                 ),
@@ -92,7 +103,7 @@ class _BodyState extends State<Body> {
                     child: Icon(Icons.delete),
                     onPressed: () {
                       cart.removeWhere((element) {
-                        return element.title == carts.title;
+                        return element.name == carts.name;
                       });
                       setState(() {});
                     },
@@ -105,7 +116,7 @@ class _BodyState extends State<Body> {
             children: cart
                 .map((cartye) => Container(
                       child: CheckOurCard(
-                        desc: cartye.title,
+                        desc: cartye.name,
                         price: cartye.price,
                       ),
                     ))
@@ -118,10 +129,21 @@ class _BodyState extends State<Body> {
 }
 
 class Cart {
-  String title, imagePath, shopeName;
-  double price;
+  String name, productId;
+  num price;
+  num quantity;
 
-  Cart({this.imagePath, this.price, this.shopeName, this.title});
+  Cart({this.price, this.name, this.productId, this.quantity});
+
+  factory Cart.fromJson(Map<String, dynamic> json) {
+    return Cart(
+      // not sure about product id
+      productId: json['productId'],
+      name: json['name'],
+      price: json['price'],
+      quantity: json['quantity'],
+    );
+  }
 }
 
 class CheckOurCard extends StatelessWidget {
