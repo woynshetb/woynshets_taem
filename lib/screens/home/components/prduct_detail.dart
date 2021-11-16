@@ -1,14 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
+import 'package:http/http.dart' as http;
+
+addTocart(String userId, String productname, num price, num productId) async {
+  var headers = {'Content-Type': 'application/json'};
+  var request = http.Request(
+      'POST', Uri.parse('https://woynshetstaem.herokuapp.com/cart'));
+  request.body = json.encode({
+    "productId": productId,
+    "name": productname,
+    "price": price,
+    "userId": userId
+  });
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    print(await response.stream.bytesToString());
+    print("added");
+  } else {
+    print(response.reasonPhrase);
+  }
+}
 
 class ProductDet extends StatefulWidget {
   final String assetPath, productTitle, produtDesc, catagory, shopeName;
   final double productPrice;
+  final num productId;
 
   const ProductDet(
       {Key key,
+      this.productId,
       this.assetPath,
       this.productPrice,
       this.productTitle,
@@ -42,6 +69,7 @@ class _ProductDetState extends State<ProductDet> {
               imgSrc: widget.assetPath,
             ),
             ItemInfo(
+              productId: widget.productId,
               title: widget.productTitle,
               assetPath: widget.assetPath,
               catagory: widget.catagory,
@@ -59,8 +87,10 @@ class _ProductDetState extends State<ProductDet> {
 class ItemInfo extends StatelessWidget {
   final String title, assetPath, productTitle, produtDesc, shopename, catagory;
   final double productPrice;
+  final num productId;
   ItemInfo(
       {this.title,
+      this.productId,
       this.assetPath,
       this.catagory,
       this.productPrice,
@@ -99,19 +129,26 @@ class ItemInfo extends StatelessWidget {
           ),
           SizedBox(height: size.height * 0.1),
 
-          // give add to cart function
+          // added a function to add to cart in to cart collection
 
           OrderButton(
-            size: size,
-            press: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CartScreen(
-                          title: title,
-                          imagePath: assetPath,
-                          price: productPrice,
-                        ))),
-          ),
+              size: size,
+              press: () {
+                addTocart(
+                  "6192566b177824d2013a4b5a",
+                  title,
+                  productPrice,
+                  productId,
+                );
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CartScreen(
+                              title: title,
+                              productId: productId,
+                              price: productPrice,
+                            )));
+              }),
         ],
       ),
     );
