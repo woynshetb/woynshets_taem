@@ -150,6 +150,7 @@ Widget _buildCard({
         // this is how you route b/n pages ( screen) without named route
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ProductDet(
+                  productId: id,
                   assetPath: imgPath,
                   productPrice: price,
                   productTitle: title,
@@ -218,7 +219,7 @@ Widget _buildCard({
                 children: [
                   if (!added) ...[
                     Text(
-                      "See more ...",
+                      "${id}",
                       style:
                           TextStyle(color: Color(0xffd17e50), fontSize: 12.0),
                     ),
