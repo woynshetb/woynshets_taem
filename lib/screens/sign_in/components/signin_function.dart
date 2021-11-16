@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/screens/login_success/login_success.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/screens/profile/profilePage.dart';
 
 //function to autenticate existing member and if the user is a member go to home
 class SignInFunc extends StatefulWidget {
@@ -55,6 +56,12 @@ class _SignInFuncState extends State<SignInFunc> {
               press: () async {
                 await signIn(widget.email, widget.password);
                 // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+
+                // pass id
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileScreenPage()));
               },
             )
           ],
