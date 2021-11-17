@@ -43,39 +43,6 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
       body: ListView(
         padding: EdgeInsets.only(left: 20),
         children: [
-          //  SearchBox(
-
-          // onChanged: (value) {
-          //   Card(
-          //     child: FutureBuilder(
-          //         future: fetchProduct(value),
-          //         builder: (context, snapshot) {
-          //           if (snapshot.hasData) {
-          //             return GridView.builder(
-          //                 gridDelegate:
-          //                     SliverGridDelegateWithFixedCrossAxisCount(
-          //                   crossAxisCount: 2,
-          //                 ),
-          //                 itemCount: snapshot.data.length,
-          //                 itemBuilder: (context, index) {
-          //                   return _buildCard(
-          //                       id: snapshot.data[index]['id'],
-          //                       title: snapshot.data[index]['title'],
-          //                       desc: snapshot.data[index]['description'],
-          //                       price: snapshot.data[index]['price'],
-          //                       cat: snapshot.data[index]['category'],
-          //                       shopeName: "zenebech baltna",
-          //                       imgPath: snapshot.data[index]['image'],
-          //                       isFavorite: false,
-          //                       added: false,
-          //                       context: context);
-          //                 });
-          //           } else
-          //             return Center(child: CircularProgressIndicator());
-          //         }),
-          //   );
-          // },
-          // ),
           Container(
             margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -101,7 +68,6 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
               ),
             ),
           ),
-
           TabBar(
             controller: _tabController,
             indicatorColor: kPrimaryColor,
