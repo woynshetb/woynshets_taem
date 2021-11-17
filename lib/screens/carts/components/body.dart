@@ -22,118 +22,72 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  List<Cart> cart = [];
-
-  // add function to pass information and add to the list
+  Future<Cart> futuring;
   @override
   void initState() {
-    cart.add(Cart(
-      //imagePath: widget.imagePath,
-      price: widget.price,
-      name: widget.title,
-    ));
-
     super.initState();
-    // addTocart(
-    //   "6192566b177824d2013a4b5a",
-    //   widget.title,
-    //   widget.price,
-    //   widget.productId,
-    // );
-  }
-
-  addTocart(String userId, String productname, num price, num productId) async {
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST', Uri.parse('https://woynshetstaem.herokuapp.com/cart'));
-    request.body = json.encode({
-      "productId": productId,
-      "name": productname,
-      "price": price,
-      "userId": userId
-    });
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      print("added");
-    } else {
-      print(response.reasonPhrase);
-    }
+    this.fetchCart();
   }
 
 // functon to read from cart db using cart model and generate it with listviewbuilder with streambuilder ( future builder)
 
-  Future<Cart> fetchCart() async {
-    final response =
-        await http.get(Uri.parse('https://woynshetstaem.herokuapp.com/cart'));
+  fetchCart() async {
+    final response = await http.get(
+      Uri.parse(
+          'https://woynshetstaem.herokuapp.com/cart/6192566b177824d2013a4b5a'),
+      headers: {'Content-Type': 'application/json'},
+    );
 
     if (response.statusCode == 200) {
-      return Cart.fromJson(jsonDecode(response.body));
+      var items = json.decode(response.body);
+      var pro = items['products'];
+      print('productS=================: $pro.');
+
+      return pro;
     } else {
-      throw Exception('Failed to load cart');
+      print("error");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(children: [
-          Column(
-            children: cart.map((carts) {
-              return Slidable(
-                key: Key(carts.name),
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                actions: [],
-                child: Card(
-                  child: ListTile(
-                    title: Text(carts.name),
-                    subtitle: Text(carts.price.toString()),
-                  ),
-                ),
-                secondaryActions: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.redAccent),
-                    child: Icon(Icons.delete),
-                    onPressed: () {
-                      cart.removeWhere((element) {
-                        return element.name == carts.name;
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Color(0xfffcfaf8),
+        body: Container(
+          padding: EdgeInsets.only(right: 15.0),
+          width: MediaQuery.of(context).size.width - 10.0,
+          height: MediaQuery.of(context).size.height,
+          child: FutureBuilder(
+              future: fetchCart(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(Icons.list),
+                          trailing:
+                              Text(snapshot.data[index]['price'].toString()),
+                          title: Text(snapshot.data[index]['name']),
+                        );
                       });
-                      setState(() {});
-                    },
-                  ),
-                ],
-              );
-            }).toList(),
-          ),
-          Column(
-            children: cart
-                .map((cartye) => Container(
-                      child: CheckOurCard(
-                        desc: cartye.name,
-                        price: cartye.price,
-                      ),
-                    ))
-                .toList(),
-          )
-        ]),
-      ),
-    ));
+                } else
+                  return Center(child: CircularProgressIndicator());
+              }),
+        ));
   }
 }
 
 class Cart {
   String name, productId;
   num price;
-  num quantity;
 
-  Cart({this.price, this.name, this.productId, this.quantity});
+  Cart({
+    this.price,
+    this.name,
+    this.productId,
+  });
 
   factory Cart.fromJson(Map<String, dynamic> json) {
     return Cart(
@@ -141,7 +95,6 @@ class Cart {
       productId: json['productId'],
       name: json['name'],
       price: json['price'],
-      quantity: json['quantity'],
     );
   }
 }
