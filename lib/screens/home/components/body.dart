@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/search_box.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
+import 'package:woynshet_taem/screens/search.dart';
 import 'catagories.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +15,7 @@ class NewHome extends StatefulWidget {
 
 class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
   TabController _tabController;
+  TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -41,40 +43,65 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
       body: ListView(
         padding: EdgeInsets.only(left: 20),
         children: [
-          SearchBox(
-            // search by product title from product database
+          //  SearchBox(
 
-            onChanged: (value) {
-              Card(
-                child: FutureBuilder(
-                    future: fetchProduct(value),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                            ),
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              return _buildCard(
-                                  id: snapshot.data[index]['id'],
-                                  title: snapshot.data[index]['title'],
-                                  desc: snapshot.data[index]['description'],
-                                  price: snapshot.data[index]['price'],
-                                  cat: snapshot.data[index]['category'],
-                                  shopeName: "zenebech baltna",
-                                  imgPath: snapshot.data[index]['image'],
-                                  isFavorite: false,
-                                  added: false,
-                                  context: context);
-                            });
-                      } else
-                        return Center(child: CircularProgressIndicator());
-                    }),
-              );
-            },
+          // onChanged: (value) {
+          //   Card(
+          //     child: FutureBuilder(
+          //         future: fetchProduct(value),
+          //         builder: (context, snapshot) {
+          //           if (snapshot.hasData) {
+          //             return GridView.builder(
+          //                 gridDelegate:
+          //                     SliverGridDelegateWithFixedCrossAxisCount(
+          //                   crossAxisCount: 2,
+          //                 ),
+          //                 itemCount: snapshot.data.length,
+          //                 itemBuilder: (context, index) {
+          //                   return _buildCard(
+          //                       id: snapshot.data[index]['id'],
+          //                       title: snapshot.data[index]['title'],
+          //                       desc: snapshot.data[index]['description'],
+          //                       price: snapshot.data[index]['price'],
+          //                       cat: snapshot.data[index]['category'],
+          //                       shopeName: "zenebech baltna",
+          //                       imgPath: snapshot.data[index]['image'],
+          //                       isFavorite: false,
+          //                       added: false,
+          //                       context: context);
+          //                 });
+          //           } else
+          //             return Center(child: CircularProgressIndicator());
+          //         }),
+          //   );
+          // },
+          // ),
+          Container(
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(
+                  color: kSecondaryColor.withOpacity(0.32),
+                )),
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                prefixIcon: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Search(value: searchController.text)))),
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                hintText: "Search",
+                hintStyle: TextStyle(color: kSecondaryColor),
+              ),
+            ),
           ),
+
           TabBar(
             controller: _tabController,
             indicatorColor: kPrimaryColor,
