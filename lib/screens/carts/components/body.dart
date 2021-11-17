@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 class Body extends StatefulWidget {
   final String title;
   final num productId;
-  final double price;
+  final num price;
 
   const Body({Key key, this.title, this.productId, this.price})
       : super(key: key);

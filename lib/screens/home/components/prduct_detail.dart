@@ -30,7 +30,7 @@ addTocart(String userId, String productname, num price, num productId) async {
 
 class ProductDet extends StatefulWidget {
   final String assetPath, productTitle, produtDesc, catagory, shopeName;
-  final double productPrice;
+  final num productPrice;
   final num productId;
 
   const ProductDet(
@@ -86,7 +86,7 @@ class _ProductDetState extends State<ProductDet> {
 
 class ItemInfo extends StatelessWidget {
   final String title, assetPath, productTitle, produtDesc, shopename, catagory;
-  final double productPrice;
+  final num productPrice;
   final num productId;
   ItemInfo(
       {this.title,
@@ -190,7 +190,7 @@ class ItemImage extends StatelessWidget {
 }
 
 class TitlePriceRating extends StatelessWidget {
-  final double price;
+  final num price;
   final int numOfReviews;
   final double rating;
   final String name;
@@ -239,7 +239,7 @@ class TitlePriceRating extends StatelessWidget {
     );
   }
 
-  ClipPath priceTag(BuildContext context, {double price}) {
+  ClipPath priceTag(BuildContext context, {num price}) {
     return ClipPath(
       clipper: PricerCliper(),
       child: Container(

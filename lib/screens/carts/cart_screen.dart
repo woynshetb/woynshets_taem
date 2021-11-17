@@ -7,7 +7,7 @@ class CartScreen extends StatelessWidget {
 
   final String title;
   final num productId;
-  final double price;
+  final num price;
 
   const CartScreen({Key key, this.productId, this.title, this.price})
       : super(key: key);
