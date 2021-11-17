@@ -7,6 +7,7 @@ import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 
 import 'package:woynshet_taem/screens/home/components/body.dart';
 import 'package:woynshet_taem/screens/moke.model.dart';
+import 'package:woynshet_taem/screens/search.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
