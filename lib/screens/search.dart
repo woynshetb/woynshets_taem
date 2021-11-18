@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
 
-class Search extends StatefulWidget {
+class SearchById extends StatefulWidget {
   final String value;
 
-  Search({this.value});
+  SearchById({this.value});
 
   @override
-  _SearchState createState() => _SearchState();
+  _SearchByIdState createState() => _SearchByIdState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchByIdState extends State<SearchById> {
   Future<Product> futureProduct;
 
   @override
