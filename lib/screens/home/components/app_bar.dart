@@ -27,7 +27,7 @@ AppBar homeAppBar(BuildContext context) {
     ),
     actions: <Widget>[
       IconButton(
-        icon: Icon(Icons.notifications),
+        icon: Icon(Icons.history_sharp),
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => Notifications()));
