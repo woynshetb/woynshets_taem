@@ -162,7 +162,7 @@ class _BodyState extends State<Body> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Auth(
-                                          productPrice: total,
+                                          totalPrice: total,
                                         )));
                           },
                         ),
@@ -261,13 +261,13 @@ class CheckOurCard extends StatelessWidget {
                 text: "Checkout",
                 press: () {
                   // this function will apply to guest
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Auth(
-                                productName: desc,
-                                productPrice: price,
-                              )));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => Auth(
+                  //               productName: desc,
+                  //               productPrice: price,
+                  //             )));
                 },
               ),
             ),
