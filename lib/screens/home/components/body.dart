@@ -5,6 +5,7 @@ import 'package:woynshet_taem/components/search_box.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
 import 'package:woynshet_taem/screens/search.dart';
+import 'package:woynshet_taem/screens/searchbytitle.dart';
 import 'catagories.dart';
 import 'package:http/http.dart' as http;
 
@@ -56,11 +57,24 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
                 border: InputBorder.none,
                 prefixIcon: IconButton(
                     icon: Icon(Icons.search),
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Search(value: searchController.text)))),
+                    onPressed: () =>
+                        // searchController.text == int
+                        //     ?
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchById(
+                                value: searchController.text.toString()),
+                          ),
+                        )
+                    // : Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) =>
+                    //           Search(value: searchController.text),
+                    //     ),
+                    //   ),
+                    ),
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 hintText: "Search",
