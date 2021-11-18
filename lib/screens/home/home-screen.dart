@@ -7,6 +7,7 @@ import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 
 import 'package:woynshet_taem/screens/home/components/body.dart';
 import 'package:woynshet_taem/screens/moke.model.dart';
+import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import 'package:woynshet_taem/screens/search.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     NewHome(),
     CartScreen(),
-    Auth(),
+    ProfileScreenPage(),
   ];
   void _onItemTapped(int index) {
     setState(() {
