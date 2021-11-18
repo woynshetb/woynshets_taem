@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 import 'package:woynshet_taem/screens/notification/history.dart';
 
 class ProfileScreenPage extends StatefulWidget {
@@ -16,9 +17,6 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -38,7 +36,10 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
           ProfileMenu(
             text: "My Cart",
             icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CartScreen()));
+            },
           ),
           SizedBox(
             height: 40,
