@@ -9,10 +9,9 @@ import 'package:http/http.dart' as http;
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
 
 class Payment extends StatefulWidget {
-  final String title;
   final num amount;
 
-  const Payment({Key key, this.title, this.amount}) : super(key: key);
+  const Payment({Key key, this.amount}) : super(key: key);
 
   @override
   _PaymentState createState() => _PaymentState();
@@ -24,8 +23,8 @@ var code = rng.nextInt(900000) + 100000;
 
 TextEditingController phoneNumberTextEditingController =
     TextEditingController();
-belchashPayment(String desc, num amount, String phonenumber, DateTime date,
-    String randomT) async {
+belchashPayment(
+    num amount, String phonenumber, DateTime date, String randomT) async {
   var headers = {
     'Accept': 'application/json',
     'Authorization':
@@ -36,7 +35,7 @@ belchashPayment(String desc, num amount, String phonenumber, DateTime date,
       http.Request('POST', Uri.parse('https://api-et.hellocash.net/invoices'));
   request.body = json.encode({
     "amount": amount,
-    "description": desc,
+    "description": "Payment for products in $date ",
     "from": phonenumber,
     "currency": "ETB",
     "tracenumber": "${randomT}",
@@ -86,7 +85,6 @@ class _PaymentState extends State<Payment> {
                 print(phoneNumberTextEditingController);
                 print(today.add(Duration(days: 3)));
                 belchashPayment(
-                    widget.title,
                     widget.amount,
                     phoneNumberTextEditingController.text,
                     today.add(Duration(days: 3)),
