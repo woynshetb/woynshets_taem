@@ -20,45 +20,34 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 30,
+          ),
           ProfilePic(),
           SizedBox(
-            height: 40,
+            height: 30,
           ),
           ProfileMenu(
-            text: "My Account",
-            icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
-            press: () {},
+            text: "Woynshet Bilihatu",
+            icon: Icons.person,
           ),
           SizedBox(
-            height: 40,
+            height: 20,
           ),
           // pass user id to get cart information by userid
           ProfileMenu(
-            text: "My Cart",
-            icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CartScreen()));
-            },
+            text: "+251964001822",
+            icon: Icons.phone,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ProfileMenu(
+            text: "wbilihatu@gmail.com",
+            icon: Icons.email,
           ),
           SizedBox(
             height: 40,
-          ),
-          ProfileMenu(
-            text: "Notificatoon",
-            icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Notifications()));
-            },
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          ProfileMenu(
-            text: "Setting",
-            icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
-            press: () {},
           ),
         ],
       ),
@@ -68,49 +57,54 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
 
 class ProfileMenu extends StatelessWidget {
   final String text;
-  final Icon icon;
-  final Function press;
+  final IconData icon;
 
-  const ProfileMenu({Key key, this.text, this.icon, this.press})
-      : super(key: key);
+  const ProfileMenu({
+    Key key,
+    this.text,
+    this.icon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Color(0xfff5f6f9)),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15))),
-          ),
-          onPressed: press,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(
-                Icons.person,
-                size: 22,
-                color: kPrimaryColor,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Container(
+        padding: EdgeInsets.only(left: 43),
+        height: 60,
+        decoration: BoxDecoration(
+            color: Color(0xfff5f6f9), borderRadius: BorderRadius.circular(15)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Icon(
+              icon,
+              size: 26,
+              color: kPrimaryColor,
+            ),
+            SizedBox(
+              width: 40,
+            ),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(color: Colors.black, fontSize: 20),
               ),
-              SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: Text(
-                  text,
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              IconButton(icon: icon, onPressed: press)
-            ],
-          )),
+            ),
+            // IconButton(
+            //     icon: Icon(
+            //       icon,
+            //       color: Color(0xfff5f6f9),
+            //     ),
+            //     onPressed: () {})
+          ],
+        ),
+      ),
     );
   }
 }
 
+// this is the circle avatar for profile page
 class ProfilePic extends StatelessWidget {
   // get user id and if uid is member image should be replaced by profile image
   const ProfilePic({
@@ -120,8 +114,8 @@ class ProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160,
-      width: 160,
+      height: 200,
+      width: 200,
       child: Stack(
         fit: StackFit.expand,
         overflow: Overflow.visible,
