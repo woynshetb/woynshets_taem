@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/screens/accounts/guestAccount.dart';
 import 'package:woynshet_taem/screens/payment/guestpayment.dart';
 
 import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
 import 'package:woynshet_taem/screens/sign_up/sign_up_screen.dart';
 
 class Auth extends StatefulWidget {
-  final String productName;
-  final num productPrice;
+  final num totalPrice;
 
-  const Auth({Key key, this.productName, this.productPrice}) : super(key: key);
+  const Auth({this.totalPrice});
 
   @override
   _AuthState createState() => _AuthState();
@@ -91,12 +91,19 @@ class _AuthState extends State<Auth> {
           CustomGesture(
             text: "Guest Checkout",
             press: () {
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => Payment(
+              //               title: widget.productName,
+              //               amount: widget.productPrice,
+              //             )));
+
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Payment(
-                            title: widget.productName,
-                            amount: widget.productPrice,
+                      builder: (context) => GuestAccount(
+                            total: widget.totalPrice,
                           )));
             },
           ),
