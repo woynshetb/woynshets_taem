@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/screens/carts/cart_screen.dart';
-import 'package:woynshet_taem/screens/notification/history.dart';
+import 'package:http/http.dart' as http;
 
+// call this page after authentication
 class ProfileScreenPage extends StatefulWidget {
   final String userId;
   ProfileScreenPage({this.userId});
@@ -15,43 +17,73 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
   // function that authenticate if the user is a member or a guest  user
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          ProfilePic(),
-          SizedBox(
-            height: 30,
-          ),
-          ProfileMenu(
-            text: "Woynshet Bilihatu",
-            icon: Icons.person,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          // pass user id to get cart information by userid
-          ProfileMenu(
-            text: "+251964001822",
-            icon: Icons.phone,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ProfileMenu(
-            text: "wbilihatu@gmail.com",
-            icon: Icons.email,
-          ),
-          SizedBox(
-            height: 40,
-          ),
-        ],
-      ),
+  void initState() {
+    super.initState();
+    fetchUser();
+  }
+
+  // get email by decoding with base 64
+  fetchUser() async {
+    final response = await http.get(
+      Uri.parse(
+          'https://woynshetstaem.herokuapp.com/profileinfo/yared@gmail.com'),
+      headers: {'Content-Type': 'application/json'},
     );
+
+    if (response.statusCode == 200) {
+      var items = json.decode(response.body);
+
+      print('productS=================: $items.');
+
+      return items;
+    } else {
+      print("error");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: fetchUser(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                ProfilePic(),
+                SizedBox(
+                  height: 30,
+                ),
+                ProfileMenu(
+                  text: snapshot.data['full_name'],
+                  icon: Icons.person,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                // pass user id to get cart information by userid
+                ProfileMenu(
+                  text: snapshot.data['mobile'],
+                  icon: Icons.phone,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ProfileMenu(
+                  text: snapshot.data['email'],
+                  icon: Icons.email,
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+              ],
+            );
+          }
+          return CircularProgressIndicator();
+        });
   }
 }
 
