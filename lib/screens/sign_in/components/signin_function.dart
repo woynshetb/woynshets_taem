@@ -58,10 +58,13 @@ class _SignInFuncState extends State<SignInFunc> {
                 // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
 
                 // pass id
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ProfileScreenPage()));
+                        builder: (context) => ProfileScreenPage(
+                              email: widget.email,
+                            )));
               },
             )
           ],

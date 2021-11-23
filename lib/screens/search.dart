@@ -19,15 +19,19 @@ class _SearchByIdState extends State<SearchById> {
   @override
   void initState() {
     super.initState();
-    futureProduct = fetchProduct(int.parse(widget.value));
+    futureProduct = fetchProduct(widget.value);
   }
 
-  Future<Product> fetchProduct(int val) async {
-    final response =
-        await http.get(Uri.parse('https://fakestoreapi.com/products/$val'));
+  Future<Product> fetchProduct(String val) async {
+    final response = await http
+        .get(Uri.parse('https://woynshetstaem.herokuapp.com/search/$val'));
 
     if (response.statusCode == 200) {
-      return Product.fromJson(jsonDecode(response.body));
+      print(response.body);
+      var items = json.decode(response.body);
+      var pro = items['products'];
+      print(pro[0]);
+      return Product.fromJson(pro[0]);
     } else {
       throw Exception('Failed to load product');
     }
@@ -41,15 +45,6 @@ class _SearchByIdState extends State<SearchById> {
           future: futureProduct,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // return Column(
-              //   children: [
-              //     Text("${snapshot.data.id}"),
-              //     Text("${snapshot.data.title}"),
-              //     Text("${snapshot.data.catagory}"),
-              //     Text("${snapshot.data.price.toString()}"),
-              //   ],
-              // );
-
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
@@ -175,9 +170,9 @@ class _SearchByIdState extends State<SearchById> {
 }
 
 class Product {
-  final int id;
+  final num id;
   final String title, catagory, description, imagePath;
-  final double price;
+  final num price;
   Product(
       {this.catagory,
       this.description,
@@ -190,7 +185,7 @@ class Product {
         id: json['id'],
         title: json['title'],
         catagory: json['category'],
-        imagePath: json['image'],
+        imagePath: json['image_url'],
         price: json['price'],
         description: json['description']);
   }

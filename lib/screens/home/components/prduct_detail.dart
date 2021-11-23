@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/models/cart.dart';
+import 'package:woynshet_taem/models/item.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -131,24 +134,40 @@ class ItemInfo extends StatelessWidget {
 
           // added a function to add to cart in to cart collection
 
-          OrderButton(
-              size: size,
-              press: () {
-                addTocart(
-                  "6192566b177824d2013a4b5a",
-                  title,
-                  productPrice,
-                  productId,
+          Card(
+            child: Consumer<Cart>(
+              builder: (context, cart, child) {
+                return OrderButton(
+                  size: size,
+                  press: () {
+                    print("added");
+                    cart.add(Item(productId, productPrice, title));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CartScreen()));
+                  },
                 );
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CartScreen(
-                              title: title,
-                              productId: productId,
-                              price: productPrice,
-                            )));
-              }),
+              },
+            ),
+          )
+          // OrderButton(
+          //     size: size,
+          //     press: () {
+          //       addTocart(
+          //         "6192566b177824d2013a4b5a",
+          //         title,
+          //         productPrice,
+          //         productId,
+          //       );
+
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (context) => CartScreen(
+          //                     title: title,
+          //                     productId: productId,
+          //                     price: productPrice,
+          //                   )));
+          //     }),
         ],
       ),
     );

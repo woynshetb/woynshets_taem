@@ -72,7 +72,9 @@ class _AuthState extends State<Auth> {
           CustomGesture(
             text: "Already member ? Login",
             press: () {
-              Navigator.pushNamed(context, SignInScreen.routeName);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SignInScreen()));
+              // Navigator.pushNamed(context, SignInScreen.routeName);
             },
           ),
 

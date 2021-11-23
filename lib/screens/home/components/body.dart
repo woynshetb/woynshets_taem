@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/search_box.dart';
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/screens/home/components/catagoriesTwo.dart';
+import 'package:woynshet_taem/screens/home/components/categoryPageFour.dart';
+import 'package:woynshet_taem/screens/home/components/categoryThree.dart';
 import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
 import 'package:woynshet_taem/screens/search.dart';
-import 'package:woynshet_taem/screens/searchbytitle.dart';
+//import 'package:woynshet_taem/screens/searchbytitle.dart';
 import 'catagories.dart';
 import 'package:http/http.dart' as http;
 
@@ -92,26 +95,23 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
             tabs: [
               Tab(
                 child: Text(
-                  "Pre-prepared sauce \n የተዘጋጁ ድልሆች",
-                  style: TextStyle(fontFamily: "Chiret"),
+                  "All Products \n አጠቃላይ ምርቶች ",
+                ),
+              ),
+              Tab(
+                child: Text(
+                  "Pre Processed Products \n ተቀምመው የተዘጋጁ የባልትና ውጤቶች",
+                  style: TextStyle(),
                 ),
               ),
               Tab(
                 child: Text(
                   "Traditional wots\n ባህላዊ ወጦች",
-                  style: TextStyle(fontFamily: "Chiret"),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  "Traditional Beverages\n ባህላዊ መጠጦች",
-                  style: TextStyle(fontFamily: "Chiret"),
                 ),
               ),
               Tab(
                 child: Text(
                   "Breads and Injera \n ዳቦ እና እንጀራ",
-                  style: TextStyle(fontFamily: "Chiret"),
                 ),
               ),
             ],
@@ -126,9 +126,9 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
               children: [
                 // can change the screen
                 ProductCatagoryPage(),
-                ProductCatagoryPage(),
-                ProductCatagoryPage(),
-                ProductCatagoryPage(),
+                ProductCatagoryPageTwo(),
+                ProductCatagoryPageThree(),
+                ProductCatagoryPageFour()
               ],
             ),
           ),

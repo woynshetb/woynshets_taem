@@ -11,9 +11,6 @@ class ProductCatagoryPage extends StatefulWidget {
 }
 
 class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
-  // List user = [];
-  // bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
@@ -21,20 +18,19 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
   }
 
   fetchProduct() async {
-    final response =
-        await http.get(Uri.parse('https://fakestoreapi.com/products'));
+    // final response =
+    //     await http.get(Uri.parse('https://192.168.17.103:3000/products'));
+
+    final response = await http
+        .get(Uri.parse('https://woynshetstaem.herokuapp.com/product'));
 
     if (response.statusCode == 200) {
       var items = json.decode(response.body);
-      return items;
-      // setState(() {
-      //   user = items;
-      //   print(user);
-      // });
+      var pro = items['products'];
+      print('productS=================: $pro.');
+
+      return pro;
     } else {
-      // setState(() {
-      //   user = [];
-      // });
       print("error");
     }
   }
@@ -65,7 +61,7 @@ class _ProductCatagoryPageState extends State<ProductCatagoryPage> {
                             price: snapshot.data[index]['price'],
                             cat: snapshot.data[index]['category'],
                             shopeName: "zenebech baltna",
-                            imgPath: snapshot.data[index]['image'],
+                            imgPath: snapshot.data[index]['image_url'],
                             isFavorite: false,
                             added: false,
                             context: context);

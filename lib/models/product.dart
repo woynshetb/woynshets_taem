@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class Product {
-  int id;
+  num id;
   String title;
-  double price;
+  num price;
   String category;
   String description;
   String image_url;
-
+  bool isAdded;
   Product(
-      {this.id,
+      {this.isAdded = false,
+      this.id,
       this.title,
       this.price,
       this.category,
       this.description,
       this.image_url});
+  void toggleAdded() {
+    isAdded = !isAdded;
+  }
 }

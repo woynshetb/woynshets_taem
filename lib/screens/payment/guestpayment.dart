@@ -28,7 +28,7 @@ belchashPayment(
   var headers = {
     'Accept': 'application/json',
     'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmluY2lwYWwiOiIxMzc2NDUwIiwic3lzdGVtIjoibHVjeSIsImdyb3VwIjoiYnVzaW5lc3MiLCJ1c2VybmFtZSI6IjEzNzY0NTAiLCJjaGFpbiI6WyJwYXNzd29yZCJdLCJpYXQiOjE2MzY3Nzk3MzksImV4cCI6MTYzNjg2NjEzOX0.5pFTTybH-edlhMms8_AbWPruQPwmBwxAVsU_QMBI4Xs',
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmluY2lwYWwiOiIxMzc2NDUwIiwic3lzdGVtIjoibHVjeSIsImdyb3VwIjoiYnVzaW5lc3MiLCJ1c2VybmFtZSI6IjEzNzY0NTAiLCJjaGFpbiI6WyJwYXNzd29yZCJdLCJpYXQiOjE2Mzc1ODU3NDAsImV4cCI6MTYzNzY3MjE0MH0.zg7zfbdHudWktaOlshrGAS0_NGsqXb-Zh5-8X2PcIBE',
     'Content-Type': 'application/json'
   };
   var request =
@@ -49,6 +49,10 @@ belchashPayment(
   http.StreamedResponse response = await request.send();
 
   if (response.statusCode == 200) {
+    print(phonenumber);
+    print(amount);
+    print(randomT);
+    print(date);
     print(await response.stream.bytesToString());
     print("yessss");
   } else {
@@ -82,18 +86,18 @@ class _PaymentState extends State<Payment> {
             DefaultButton(
               text: "Check out and Confirm with your phone",
               press: () {
-                print(phoneNumberTextEditingController);
+                //  print(phoneNumberTextEditingController);
                 print(today.add(Duration(days: 3)));
-                belchashPayment(
-                    widget.amount,
-                    phoneNumberTextEditingController.text,
-                    today.add(Duration(days: 3)),
-                    code.toString());
+                // belchashPayment(
+                //     widget.amount,
+                //     phoneNumberTextEditingController.text,
+                //     today.add(Duration(days: 3)),
+                //     code.toString());
                 // go to profile page by passing id as parameter
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfileScreenPage()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => ProfileScreenPage()));
               },
             )
           ],

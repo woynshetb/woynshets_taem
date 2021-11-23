@@ -1,13 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/models/product.dart';
 import 'package:woynshet_taem/screens/authenticate/auth.dart';
 
 import 'package:woynshet_taem/size_config.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:woynshet_taem/models/cart.dart';
 
 class Body extends StatefulWidget {
   final String title;
@@ -21,12 +25,9 @@ class Body extends StatefulWidget {
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<Body> {
-  Future<Cart> futuring;
-  List<Cart> summary;
-  num total = 0;
-  num finallo;
+List<Product> product = [];
 
+class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
@@ -53,38 +54,30 @@ class _BodyState extends State<Body> {
     }
   }
 
-  calculateTotal(cartlist) {
-    cartlist.forEach((element) {
-      total = total + element.price;
-    });
-  }
+  addTocart() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xfffcfaf8),
-        body: Container(
-          padding: EdgeInsets.only(right: 15.0),
-          width: MediaQuery.of(context).size.width - 10.0,
-          height: MediaQuery.of(context).size.height,
-          child: FutureBuilder(
-              future: fetchCart(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(Icons.list),
-                          trailing:
-                              Text(snapshot.data[index]['price'].toString()),
-                          title: Text(snapshot.data[index]['name']),
-                        );
-                      });
-                } else
-                  return Center(child: CircularProgressIndicator());
-              }),
+        body: Consumer<Cart>(
+          builder: (context, cart, child) {
+            return ListView.builder(
+                itemCount: cart.basketitem.length,
+                itemBuilder: (context, i) {
+                  return Card(
+                    child: ListTile(
+                      title: Text("${cart.basketitem[i].title}"),
+                      trailing: IconButton(
+                          icon: Icon(Icons.remove),
+                          onPressed: () {
+                            cart.remove(cart.basketitem[i]);
+                          }),
+                    ),
+                  );
+                });
+          },
         ),
         bottomNavigationBar: Container(
           padding: EdgeInsets.all(15),
@@ -108,10 +101,6 @@ class _BodyState extends State<Body> {
               future: fetchCart(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  for (var i = 0; i < snapshot.data.length; i++) {
-                    total = snapshot.data[0]['price'] + total;
-                  }
-
                   return Column(
                     children: [
                       Row(
@@ -132,22 +121,28 @@ class _BodyState extends State<Body> {
                           SizedBox(
                             width: 20,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text.rich(
-                                TextSpan(
-                                  text: "Total:\n\n",
-                                  children: [
+                          Consumer<Cart>(
+                            builder: (context, cart, child) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text.rich(
                                     TextSpan(
-                                        text: total.toString(),
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.black)),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                                      text: "Total:\n\n",
+                                      children: [
+                                        TextSpan(
+                                            text: "${cart.totalPrice}",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black)),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          )
                         ],
                       ),
                       SizedBox(
@@ -155,15 +150,19 @@ class _BodyState extends State<Body> {
                       ),
                       SizedBox(
                         width: getProportionateScreenWidth(190),
-                        child: DefaultButton(
-                          text: "Checkout",
-                          press: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Auth(
-                                          totalPrice: total,
-                                        )));
+                        child: Consumer<Cart>(
+                          builder: (context, cart, child) {
+                            return DefaultButton(
+                              text: "Checkout",
+                              press: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Auth(
+                                              totalPrice: cart.totalPrice,
+                                            )));
+                              },
+                            );
                           },
                         ),
                       ),
@@ -173,26 +172,6 @@ class _BodyState extends State<Body> {
                   return Center(child: CircularProgressIndicator());
               }),
         ));
-  }
-}
-
-class Cart {
-  String name, productId;
-  num price;
-
-  Cart({
-    this.price,
-    this.name,
-    this.productId,
-  });
-
-  factory Cart.fromJson(Map<String, dynamic> json) {
-    return Cart(
-      // not sure about product id
-      productId: json['productId'],
-      name: json['name'],
-      price: json['price'],
-    );
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/screens/home/components/testing.dart';
 import 'package:woynshet_taem/screens/home/home-screen.dart';
 import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
 
@@ -66,14 +67,14 @@ class _BodyState extends State<Body> {
                       height: 40,
                     ),
                     DefaultButton(
-                      text: "Skip",
+                      text: currentPage == 0 ? "Skip" : "Continue",
                       press: () {
                         // Navigator.pushNamed(context, SignInScreen.routeName);
 
                         Navigator.of(context).push(_animatedRoute());
                       },
                     ),
-                    Spacer(),
+                    Spacer()
                   ],
                 ),
               ),
