@@ -68,9 +68,25 @@ class _BodyState extends State<Body> {
                 itemBuilder: (context, i) {
                   return Card(
                     child: ListTile(
-                      title: Text("${cart.basketitem[i].title}"),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(Icons.list),
+                          Text(
+                            "${cart.basketitem[i].title}",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          SizedBox(
+                            width: 35,
+                          ),
+                          Text("${cart.basketitem[i].price} Birr"),
+                          SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
                       trailing: IconButton(
-                          icon: Icon(Icons.remove),
+                          icon: Icon(Icons.delete_sharp),
                           onPressed: () {
                             cart.remove(cart.basketitem[i]);
                           }),
@@ -172,87 +188,5 @@ class _BodyState extends State<Body> {
                   return Center(child: CircularProgressIndicator());
               }),
         ));
-  }
-}
-
-class CheckOurCard extends StatelessWidget {
-  final String desc;
-  final num price;
-
-  const CheckOurCard({Key key, this.desc, this.price}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-      height: 174,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, -15),
-            blurRadius: 20,
-            color: Color(0xFFDADADA).withOpacity(0.15),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  width: getProportionateScreenWidth(40),
-                  height: getProportionateScreenHeight(40),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF5F6F9),
-                  ),
-                  child: Icon(
-                    Icons.receipt,
-                    color: kPrimaryColor,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text.rich(
-                  TextSpan(
-                    text: "Total:\n",
-                    children: [
-                      TextSpan(
-                          text: price.toString(),
-                          style: TextStyle(fontSize: 16, color: Colors.black)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: getProportionateScreenWidth(190),
-              child: DefaultButton(
-                text: "Checkout",
-                press: () {
-                  // this function will apply to guest
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => Auth(
-                  //               productName: desc,
-                  //               productPrice: price,
-                  //             )));
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
