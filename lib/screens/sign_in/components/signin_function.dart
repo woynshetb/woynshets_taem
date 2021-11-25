@@ -63,7 +63,7 @@ class _SignInFuncState extends State<SignInFunc> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ProfileScreenPage(
-                              email: widget.email,
+                              widget.email,
                             )));
               },
             )
