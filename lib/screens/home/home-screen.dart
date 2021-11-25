@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     NewHome(),
     CartScreen(),
-    ProfileScreenPage(),
+    ProfileScreenPage(""),
   ];
   void _onItemTapped(int index) {
     setState(() {
