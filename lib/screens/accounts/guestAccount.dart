@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:woynshet_taem/Widgets/customTextField.dart';
 import 'package:woynshet_taem/components/default_button.dart';
+import 'package:woynshet_taem/models/response.dart';
+import 'package:woynshet_taem/screens/notification/history.dart';
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
+import 'package:woynshet_taem/screens/success/success.dart';
+import 'package:woynshet_taem/size_config.dart';
 
 class GuestAccount extends StatefulWidget {
   final num total;
@@ -22,35 +26,32 @@ var code = rng.nextInt(900000) + 100000;
 
 TextEditingController phoneNumberTextEditingController =
     TextEditingController();
+var value;
 
-belchashPayment(
+Future<Helo> belchashPayment(
     num amount, String phonenumber, DateTime date, String randomT) async {
-  var headers = {
-    'Accept': 'application/json',
-    'Authorization':
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmluY2lwYWwiOiIxMzc2NDUwIiwic3lzdGVtIjoibHVjeSIsImdyb3VwIjoiYnVzaW5lc3MiLCJ1c2VybmFtZSI6IjEzNzY0NTAiLCJjaGFpbiI6WyJwYXNzd29yZCJdLCJpYXQiOjE2Mzc1ODU3NDAsImV4cCI6MTYzNzY3MjE0MH0.zg7zfbdHudWktaOlshrGAS0_NGsqXb-Zh5-8X2PcIBE',
-    'Content-Type': 'application/json'
-  };
-  var request =
-      http.Request('POST', Uri.parse('https://api-et.hellocash.net/invoices'));
-  request.body = json.encode({
-    "amount": amount,
-    "description": "Payment for products in $date ",
-    "from": phonenumber,
-    "currency": "ETB",
-    "tracenumber": "${randomT}",
-    "notifyfrom": true,
-    "notifyto": true,
-    "expires": DateFormat("yyyy-MM-dd").format(date),
-  });
+  var headers = {'Content-Type': 'application/json'};
+  var request = http.Request(
+      'POST', Uri.parse('https://woynshetstaem.herokuapp.com/orders'));
 
+  request.body = json.encode({
+    "mobile_phone": phonenumber,
+    "description": "Payment for products in $date ",
+    "amount": amount
+  });
   request.headers.addAll(headers);
 
-  http.StreamedResponse response = await request.send();
+  var streamedResponse = await request.send();
+  var response = await http.Response.fromStream(streamedResponse);
 
   if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
+    var decode = jsonDecode(response.body);
+    print(decode["status"]);
+    print(response.body);
+    print(jsonDecode(response.body));
+
     print("yessss");
+    return Helo.fromJson(jsonDecode(response.body));
   } else {
     print("whyy is");
     print(response.reasonPhrase);
@@ -73,56 +74,132 @@ guestCreation(String phoneNumber) async {
 }
 
 class _GuestAccountState extends State<GuestAccount> {
+  Future<Helo> futureHistory;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          child: Column(
-            children: [
-              Text("Total"),
-              Text("Enter your phone number to checkout"),
-              Text(widget.total.toString()),
-
-              CustomeTextField(
-                isObsecure: false,
-                controller: phoneNumberTextEditingController,
-                data: Icons.phone,
-                hintText: "please enter with +2519.....",
-                val: (controller) {
-                  if (controller == null || controller.isEmpty) {
-                    print(phoneNumberTextEditingController);
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-
-              DefaultButton(
-                text: "Check out and Confirm with your phone",
-                press: () {
-                  guestCreation(phoneNumberTextEditingController.text);
-                  belchashPayment(
-                      widget.total,
-                      phoneNumberTextEditingController.text,
-                      today.add(Duration(days: 3)),
-                      code.toString());
-                  // go to profile page by passing id as parameter
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileScreenPage()));
-                },
-              )
-
-              // DefaultButton(
-              //   text: "Click to confirm",
-              //   press: guestCreation(widget.total),
-              // )
-            ],
+          padding: EdgeInsets.all(30),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 200,
+                ),
+                Text("Summary",
+                    style: TextStyle(
+                        fontFamily: "Kiros",
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold)),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Total Price",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Text(
+                      widget.total.toString() + " Birr",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Enter Your Phone  Number to Complete Your Checkout",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: "Kiros",
+                      fontWeight: FontWeight.w900),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomeTextField(
+                  isObsecure: false,
+                  controller: phoneNumberTextEditingController,
+                  data: Icons.phone,
+                  hintText: "Mobile Phone",
+                  val: (controller) {
+                    if (controller == null || controller.isEmpty) {
+                      print(phoneNumberTextEditingController);
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 30),
+                DefaultButton(
+                  text: "Pay With HeloCash",
+                  press: () {
+                    guestCreation(phoneNumberTextEditingController.text);
+                    futureHistory = belchashPayment(
+                        widget.total,
+                        phoneNumberTextEditingController.text,
+                        today.add(Duration(days: 3)),
+                        code.toString());
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Success(
+                                  futureHistory: futureHistory,
+                                )));
+                  },
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: 200,
+                  height: getProportionateScreenHeight(40),
+                  child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    color: Colors.blue,
+                    onPressed: () {},
+                    child: Text(
+                      "Pay With mamapays",
+                      style: TextStyle(
+                        fontSize: getProportionateScreenWidth(18),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class History {
+  final String expires;
+  final String date;
+  final String code;
+  final String id;
+  final num amount;
+  final String status;
+  History(
+      {this.id, this.amount, this.status, this.code, this.expires, this.date});
+  factory History.fromJson(Map<String, dynamic> json) {
+    return History(
+      date: json['date'],
+      expires: json['expires'],
+      code: json['code'],
+      id: json['id'],
+      amount: json['amount'],
+      status: json['status'],
     );
   }
 }
