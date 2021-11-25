@@ -13,7 +13,7 @@ var userEmail;
 
 class ProfileScreenPage extends StatefulWidget {
   final String email;
-  ProfileScreenPage({this.email});
+  ProfileScreenPage(String text, {this.email});
 
   @override
   _ProfileScreenPageState createState() => _ProfileScreenPageState();
