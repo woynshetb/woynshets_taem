@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/accounts/guestAccount.dart';
-import 'package:woynshet_taem/screens/payment/guestpayment.dart';
 
 import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
 import 'package:woynshet_taem/screens/sign_up/sign_up_screen.dart';
@@ -70,7 +69,7 @@ class _AuthState extends State<Auth> {
           ),
 
           CustomGesture(
-            text: "Already member ? Login",
+            text: "Already member ? SignIn",
             press: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SignInScreen()));
