@@ -95,7 +95,7 @@ class _UserPaymentState extends State<UserPayment> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ProfileScreenPage()));
+                        builder: (context) => ProfileScreenPage("")));
               },
             )
           ],
