@@ -59,11 +59,22 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Center(
+            child: Text(
+              "Your Cart",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          automaticallyImplyLeading: false,
+        ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xfffcfaf8),
         body: Consumer<Cart>(
           builder: (context, cart, child) {
             return ListView.builder(
+                padding: EdgeInsets.all(30),
                 itemCount: cart.basketitem.length,
                 itemBuilder: (context, i) {
                   return Card(
