@@ -13,7 +13,7 @@ var userEmail;
 
 class ProfileScreenPage extends StatefulWidget {
   final String email;
-  ProfileScreenPage(String text, {this.email});
+  ProfileScreenPage(this.email);
 
   @override
   _ProfileScreenPageState createState() => _ProfileScreenPageState();
@@ -22,21 +22,10 @@ class ProfileScreenPage extends StatefulWidget {
 class _ProfileScreenPageState extends State<ProfileScreenPage> {
   // function that authenticate if the user is a member or a guest  user
 
-  @override
-  void initState() {
-    super.initState();
-    store(widget.email);
-  }
-
-  Future<void> store(email) async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-
-    pref.setString(userEmail, email);
-  }
-
   // get email by decoding with base 64
   fetchUser(String email) async {
-    if (email != null) {
+    print(email);
+    if (email != null && email.isEmpty == false) {
       final response = await http.get(
         Uri.parse('https://woynshetstaem.herokuapp.com/profileinfo/$email'),
         headers: {'Content-Type': 'application/json'},
@@ -47,7 +36,7 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
 
         return items;
       } else {
-        print("error");
+        print("error in if ");
       }
     } else {
       {
@@ -114,7 +103,11 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                 ],
               );
             }
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+              ),
+            );
           }),
     );
   }

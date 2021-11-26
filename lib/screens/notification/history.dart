@@ -2,8 +2,13 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/constants.dart';
 
 class Notifications extends StatefulWidget {
+  final String value;
+
+  const Notifications({Key key, this.value}) : super(key: key);
+
   @override
   _NotificationsState createState() => _NotificationsState();
 }
@@ -13,33 +18,24 @@ class _NotificationsState extends State<Notifications> {
   @override
   void initState() {
     super.initState();
-    futureHistory = getNotification();
+    futureHistory = getNotification(widget.value.toString());
   }
 
   DateFormat format = DateFormat("dd.MM.yyyy");
 
-  Future<History> getNotification() async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmluY2lwYWwiOiIxMzc2NDUwIiwic3lzdGVtIjoibHVjeSIsImdyb3VwIjoiYnVzaW5lc3MiLCJ1c2VybmFtZSI6IjEzNzY0NTAiLCJjaGFpbiI6WyJwYXNzd29yZCJdLCJpYXQiOjE2MzY5Nzc3NzksImV4cCI6MTYzNzA2NDE3OX0.XloIQYe6J-nOjHseJU4uYG23Lgm2xwtFr67RwElt4iY'
-    };
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            'https://api-et.hellocash.net/invoices/VWH235HRKXR3YJD73STO9O944KGW64DF'));
+  Future<History> getNotification(String id) async {
+    var headers = {'Content-Type': 'application/json'};
+    var req = http.Request(
+        'GET', Uri.parse('https://woynshetstaem.herokuapp.com/orders/$id'));
+    req.headers.addAll(headers);
+    var streamedResponse = await req.send();
+    var response = await http.Response.fromStream(streamedResponse);
 
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    final resStr = await response.stream.bytesToString();
     if (response.statusCode == 200) {
-      // print(await response.stream.bytesToString());
-      print(resStr);
-      return History.fromJson(jsonDecode(resStr));
-      // return History.fromJson(
-      //     jsonDecode(await response.stream.bytesToString()));
+      var decode = jsonDecode(response.body);
+
+      print(decode['response']);
+      return History.fromJson(decode['response']);
     } else {
       throw Exception('Failed to load ');
     }
@@ -52,40 +48,62 @@ class _NotificationsState extends State<Notifications> {
           title: Text("History"),
         ),
         body: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 50.0),
-                child: Text(
-                  "Your Activity",
-                  style: TextStyle(
-                      fontFamily: "Overlock",
-                      color: Colors.black,
-                      fontSize: 30),
-                ),
-              ),
-              //     IconButton(
-              //         icon: Icon(Icons.history),
-              //         onPressed: () {
-              //           getNotification();
-              //         })
-              //   ],
-              // ),
-            ],
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              "Summary About Your Order  ",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontFamily: "Overlock",
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           FutureBuilder<History>(
             future: futureHistory,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("${snapshot.data.amount}"),
-                    Text("${snapshot.data.id}"),
-                    Text("${snapshot.data.status}"),
-                    Text("${snapshot.data.code}"),
-                    Text("${snapshot.data.expires}"),
-                    Text("${snapshot.data.date}"),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ListTile(
+                        title: Text("id"),
+                        trailing: Text("${snapshot.data.id}")),
+                    ListTile(
+                        title: Text("code"),
+                        trailing: Text("${snapshot.data.code}")),
+                    ListTile(
+                        title: Text("date"),
+                        trailing: Text("${snapshot.data.date}")),
+                    ListTile(
+                        title: Text("expires"),
+                        trailing: Text("${snapshot.data.expires}")),
+                    ListTile(
+                        title: Text("from"),
+                        trailing: Text("${snapshot.data.from}")),
+                    ListTile(
+                        title: Text("to"),
+                        trailing: Text("${snapshot.data.toname}")),
+                    ListTile(
+                        title: Text("amount"),
+                        trailing: Text("${snapshot.data.amount}")),
+                    ListTile(
+                        title: Text("description"),
+                        trailing: Text("${snapshot.data.description}")),
+                    ListTile(
+                        title: Text("status"),
+                        trailing: Text("${snapshot.data.status}")),
+                    ListTile(
+                        title: Text("tracenumber"),
+                        trailing: Text("${snapshot.data.tracenumber}")),
+
+                    //tracenumber
                   ],
                 );
               } else if (snapshot.hasError) {
@@ -93,7 +111,9 @@ class _NotificationsState extends State<Notifications> {
               }
 
               // By default, show a loading spinner.
-              return const CircularProgressIndicator();
+              return const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+              );
             },
           ),
         ]));
@@ -101,22 +121,41 @@ class _NotificationsState extends State<Notifications> {
 }
 
 class History {
-  final String expires;
-  final String date;
-  final String code;
   final String id;
+  final String code;
+  final String date;
+  final String expires;
+  final String from;
+  final String toname;
+  final String description;
+  final String tracenumber;
   final num amount;
   final String status;
-  History(
-      {this.id, this.amount, this.status, this.code, this.expires, this.date});
+
+  History({
+    this.code,
+    this.toname,
+    this.description,
+    this.expires,
+    this.tracenumber,
+    this.date,
+    this.from,
+    this.id,
+    this.amount,
+    this.status,
+  });
   factory History.fromJson(Map<String, dynamic> json) {
     return History(
-      date: json['date'],
-      expires: json['expires'],
-      code: json['code'],
-      id: json['id'],
-      amount: json['amount'],
       status: json['status'],
+      amount: json['amount'],
+      id: json['id'],
+      from: json['from'],
+      date: json['date'],
+      tracenumber: json['tracenumber'],
+      expires: json['expires'],
+      description: json['description'],
+      toname: json['toname'],
+      code: json['code'],
     );
   }
 }

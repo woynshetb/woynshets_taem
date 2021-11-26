@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:woynshet_taem/components/default_button.dart';
+import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/models/response.dart';
 import 'package:woynshet_taem/screens/home/home-screen.dart';
 import 'package:woynshet_taem/size_config.dart';
@@ -144,7 +145,11 @@ class Success extends StatelessWidget {
               return Text('${snapshot.error}');
             }
 
-            return const CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+              ),
+            );
           },
         ),
       ),

@@ -123,7 +123,7 @@ class _GuestAccountState extends State<GuestAccount> {
                       fontWeight: FontWeight.w900),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 CustomeTextField(
                   isObsecure: false,
@@ -138,40 +138,73 @@ class _GuestAccountState extends State<GuestAccount> {
                     return null;
                   },
                 ),
-                SizedBox(height: 30),
-                DefaultButton(
-                  text: "Pay With HeloCash",
-                  press: () {
-                    guestCreation(phoneNumberTextEditingController.text);
-                    futureHistory = belchashPayment(
-                        widget.total,
-                        phoneNumberTextEditingController.text,
-                        today.add(Duration(days: 3)),
-                        code.toString());
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Success(
-                                  futureHistory: futureHistory,
-                                )));
-                  },
-                ),
-                SizedBox(height: 20),
                 SizedBox(
-                  width: 200,
-                  height: getProportionateScreenHeight(40),
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    color: Colors.blue,
-                    onPressed: () {},
-                    child: Text(
-                      "Pay With mamapays",
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(18),
-                        color: Colors.white,
+                  height: 30,
+                ),
+                SizedBox(
+                  height: 70,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Pay With ",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Kiros",
+                            fontWeight: FontWeight.w900),
                       ),
-                    ),
+                      IconButton(
+                        icon: Image.asset('assets/images/helo.png'),
+                        iconSize: 50,
+                        onPressed: () {
+                          guestCreation(phoneNumberTextEditingController.text);
+                          futureHistory = belchashPayment(
+                              widget.total,
+                              phoneNumberTextEditingController.text,
+                              today.add(Duration(days: 3)),
+                              code.toString());
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Success(
+                                        futureHistory: futureHistory,
+                                      )));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 70,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Pay With ",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Kiros",
+                            fontWeight: FontWeight.w900),
+                      ),
+                      IconButton(
+                        icon: Image.asset('assets/images/mama.jpg'),
+                        iconSize: 100,
+                        onPressed: () {
+                          guestCreation(phoneNumberTextEditingController.text);
+                          futureHistory = belchashPayment(
+                              widget.total,
+                              phoneNumberTextEditingController.text,
+                              today.add(Duration(days: 3)),
+                              code.toString());
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Success(
+                                        futureHistory: futureHistory,
+                                      )));
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ],

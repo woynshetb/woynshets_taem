@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/screens/authenticate/auth.dart';
+
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 
 import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 
 import 'package:woynshet_taem/screens/home/components/body.dart';
-import 'package:woynshet_taem/screens/moke.model.dart';
+
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
-import 'package:woynshet_taem/screens/search.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";

@@ -185,7 +185,10 @@ class _BodyState extends State<Body> {
                     ],
                   );
                 } else
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                  ));
               }),
         ));
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/constants.dart';
 
 import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
 
@@ -68,7 +69,9 @@ class _HeyState extends State<Hey> {
                             context: context);
                       });
                 } else
-                  return CircularProgressIndicator();
+                  return CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                  );
               }),
         ));
   }

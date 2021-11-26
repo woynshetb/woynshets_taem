@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/constants.dart';
 
 import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
 
@@ -93,7 +94,10 @@ class _SearchState extends State<Search> {
                         //     context: context);
                       });
                 } else
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                  ));
               }),
         ));
   }

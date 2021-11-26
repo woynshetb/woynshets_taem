@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/notification/history.dart';
+import 'package:woynshet_taem/screens/notification/historyFunction.dart';
 
 AppBar homeAppBar(BuildContext context) {
   return AppBar(
@@ -27,10 +28,10 @@ AppBar homeAppBar(BuildContext context) {
     ),
     actions: <Widget>[
       IconButton(
-        icon: Icon(Icons.history_sharp),
+        icon: Icon(Icons.info_outline),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Notifications()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Search()));
         },
       ),
     ],

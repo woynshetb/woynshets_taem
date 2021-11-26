@@ -59,11 +59,11 @@ class _NewHomeState extends State<NewHome> with SingleTickerProviderStateMixin {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 prefixIcon: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () =>
-                        // searchController.text == int
-                        //     ?
-                        Navigator.push(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.orange,
+                    ),
+                    onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => SearchById(

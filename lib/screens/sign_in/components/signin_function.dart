@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:woynshet_taem/components/default_button.dart';
+import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/login_success/login_success.dart';
 import 'package:http/http.dart' as http;
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
+import 'package:woynshet_taem/size_config.dart';
 
 //function to autenticate existing member and if the user is a member go to home
 class SignInFunc extends StatefulWidget {
@@ -47,27 +49,91 @@ class _SignInFuncState extends State<SignInFunc> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Text(widget.email),
-            Text(widget.password),
-            DefaultButton(
-              text: "continue",
-              press: () async {
-                await signIn(widget.email, widget.password);
-                // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Is that Your Correct Credential ?",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: getProportionateScreenWidth(20),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Overlock"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Email :",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Kiros",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      widget.email,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Kiros",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Password : ",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Kiros",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 80,
+                    ),
+                    Text(
+                      widget.password,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Kiros",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                  ],
+                ),
+                DefaultButton(
+                  text: "Yes",
+                  press: () async {
+                    await signIn(widget.email, widget.password);
+                    // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
 
-                // pass id
+                    // pass id
 
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfileScreenPage(
-                              widget.email,
-                            )));
-              },
-            )
-          ],
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreenPage(
+                                  widget.email,
+                                )));
+                  },
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
