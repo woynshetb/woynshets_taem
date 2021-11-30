@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: SizeConfig.screenHeight * 0.08,
+                  height: SizeConfig.screenHeight * 0.05,
                 ),
                 Text(
                   "Welcome back",

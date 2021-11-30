@@ -1,115 +1,77 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:woynshet_taem/providers/auth.dart';
+
 import 'package:woynshet_taem/screens/home/home-screen.dart';
 
-// call this page after authentication
-
-var userEmail;
-
 class ProfileScreenPage extends StatefulWidget {
-  final String email;
-  ProfileScreenPage(this.email);
+  final String username;
+  final String useremail;
+  final String userPhonenumber;
+
+  ProfileScreenPage({this.username, this.userPhonenumber, this.useremail});
 
   @override
   _ProfileScreenPageState createState() => _ProfileScreenPageState();
 }
 
 class _ProfileScreenPageState extends State<ProfileScreenPage> {
-  // function that authenticate if the user is a member or a guest  user
-
-  // get email by decoding with base 64
-  fetchUser(String email) async {
-    print(email);
-    if (email != null && email.isEmpty == false) {
-      final response = await http.get(
-        Uri.parse('https://woynshetstaem.herokuapp.com/profileinfo/$email'),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200) {
-        var items = json.decode(response.body);
-
-        return items;
-      } else {
-        print("error in if ");
-      }
-    } else {
-      {
-        final response = await http.get(
-          Uri.parse(
-              'https://woynshetstaem.herokuapp.com/profileinfo/suz@gmail.com'),
-          headers: {'Content-Type': 'application/json'},
-        );
-
-        if (response.statusCode == 200) {
-          var items = json.decode(response.body);
-
-          return items;
-        } else {
-          print("error in else");
-        }
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-          future: fetchUser(widget.email),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  ProfilePic(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  ProfileMenu(
-                    text: snapshot.data['full_name'],
-                    icon: Icons.person,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  // pass user id to get cart information by userid
-                  ProfileMenu(
-                    text: snapshot.data['mobile'],
-                    icon: Icons.phone,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ProfileMenu(
-                    text: snapshot.data['email'],
-                    icon: Icons.email,
-                  ),
-
-                  DefaultButton(
-                    text: "go back",
-                    press: () {
-                      Navigator.pushNamed(context, HomeScreen.routeName);
-                    },
-                  )
-                ],
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
-              ),
-            );
-          }),
-    );
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        ProfilePic(),
+        SizedBox(
+          height: 10,
+        ),
+        ProfileMenu(
+          text: widget.username,
+          icon: Icons.person,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ProfileMenu(
+          text: widget.userPhonenumber,
+          icon: Icons.phone,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ProfileMenu(
+          text: widget.useremail,
+          icon: Icons.email,
+        ),
+        SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  icon: Icon(Icons.home),
+                  onPressed: () {
+                    Navigator.pushNamed(context, HomeScreen.routeName);
+                  }),
+              IconButton(
+                  icon: Icon(Icons.logout),
+                  onPressed: () {
+                    Consumer<Auth>(
+                      builder: (context, auth, child) => auth.logout(),
+                    );
+                  })
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 }
 
@@ -172,8 +134,8 @@ class ProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
-      width: 200,
+      height: 150,
+      width: 150,
       child: Stack(
         fit: StackFit.expand,
         overflow: Overflow.visible,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/screens/home/components/testing.dart';
+
 import 'package:woynshet_taem/screens/home/home-screen.dart';
 import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
 

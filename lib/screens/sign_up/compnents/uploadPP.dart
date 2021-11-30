@@ -174,6 +174,8 @@ class _UploadState extends State<Upload> {
                           return 'Not Match';
                         return null;
                       }),
+
+                  // this from this folder signup function
                   DefaultButton(
                     text: "Next",
                     press: () {
@@ -192,6 +194,7 @@ class _UploadState extends State<Upload> {
                       }
                     },
                   ),
+                  // this is from auth provider funtion
                 ],
               ),
             ),

@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:woynshet_taem/components/default_button.dart';
-import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/screens/login_success/login_success.dart';
 import 'package:http/http.dart' as http;
+import 'package:woynshet_taem/providers/auth.dart';
+import 'package:woynshet_taem/screens/authenticate/auth.dart';
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import 'package:woynshet_taem/size_config.dart';
 
@@ -100,7 +99,7 @@ class _SignInFuncState extends State<SignInFunc> {
                           color: Colors.black),
                     ),
                     SizedBox(
-                      width: 80,
+                      width: 50,
                     ),
                     Text(
                       widget.password,
@@ -118,19 +117,52 @@ class _SignInFuncState extends State<SignInFunc> {
                 DefaultButton(
                   text: "Yes",
                   press: () async {
+                    print("whyy");
                     await signIn(widget.email, widget.password);
+                    print("whyy");
                     // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
 
                     // pass id
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileScreenPage(
-                                  widget.email,
-                                )));
+                    print("whyy");
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => ProfileScreenPage(
+                    //               widget.email,
+                    //             )));
                   },
-                )
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  child: Consumer<Auth>(
+                    builder: (context, func, child) {
+                      return DefaultButton(
+                        text: "using auth",
+                        press: () async {
+                          await func.signIn(widget.email, widget.password);
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Consumer<Auth>(
+                                        builder: (context, auth, child) {
+                                          return auth.user.length != 0
+                                              ? ProfileScreenPage(
+                                                  username: auth.user[0].name,
+                                                  userPhonenumber:
+                                                      auth.user[0].phoneNumber,
+                                                  useremail: auth.user[0].email)
+                                              : Authen();
+                                        },
+                                      )));
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

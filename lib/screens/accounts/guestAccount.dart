@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:woynshet_taem/Widgets/customTextField.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/models/response.dart';
+import 'package:woynshet_taem/providers/auth.dart';
 import 'package:woynshet_taem/screens/notification/history.dart';
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import 'package:woynshet_taem/screens/success/success.dart';
@@ -75,6 +77,7 @@ guestCreation(String phoneNumber) async {
 
 class _GuestAccountState extends State<GuestAccount> {
   Future<Helo> futureHistory;
+  String number;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -125,18 +128,30 @@ class _GuestAccountState extends State<GuestAccount> {
                 SizedBox(
                   height: 30,
                 ),
-                CustomeTextField(
-                  isObsecure: false,
-                  controller: phoneNumberTextEditingController,
-                  data: Icons.phone,
-                  hintText: "Mobile Phone",
-                  val: (controller) {
-                    if (controller == null || controller.isEmpty) {
-                      print(phoneNumberTextEditingController);
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  padding: EdgeInsets.all(3),
+                  margin: EdgeInsets.all(7),
+                  child: TextFormField(
+                    controller: phoneNumberTextEditingController,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.phone,
+                        color: Colors.orange,
+                      ),
+                      focusColor: Colors.orange,
+                      hintText: 'enter ohone number',
+                    ),
+                    onChanged: (value) {
+                      number = value;
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 30,
@@ -153,22 +168,31 @@ class _GuestAccountState extends State<GuestAccount> {
                             fontFamily: "Kiros",
                             fontWeight: FontWeight.w900),
                       ),
-                      IconButton(
-                        icon: Image.asset('assets/images/helo.png'),
-                        iconSize: 50,
-                        onPressed: () {
-                          guestCreation(phoneNumberTextEditingController.text);
-                          futureHistory = belchashPayment(
-                              widget.total,
-                              phoneNumberTextEditingController.text,
-                              today.add(Duration(days: 3)),
-                              code.toString());
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Success(
-                                        futureHistory: futureHistory,
-                                      )));
+                      Consumer<Auth>(
+                        builder: (context, auth, child) {
+                          return IconButton(
+                            icon: Image.asset('assets/images/helo.png'),
+                            iconSize: 50,
+                            onPressed: () {
+                              print("this is texy");
+                              print(number);
+                              auth.guestCreation(number);
+                              Navigator.pop(context);
+                              // should be the same for all users
+
+                              // futureHistory = belchashPayment(
+                              //     widget.total,
+                              //     phoneNumberTextEditingController.text,
+                              //     today.add(Duration(days: 3)),
+                              //     code.toString());
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Success(
+                              //               futureHistory: futureHistory,
+                              //             )));
+                            },
+                          );
                         },
                       ),
                     ],

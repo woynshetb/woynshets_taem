@@ -8,8 +8,10 @@ class Product {
   String description;
   String image_url;
   bool isAdded;
+  bool isFavorite;
   Product(
-      {this.isAdded = false,
+      {this.isFavorite = false,
+      this.isAdded = false,
       this.id,
       this.title,
       this.price,

@@ -7,6 +7,7 @@ import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/models/product.dart';
 import 'package:woynshet_taem/screens/authenticate/auth.dart';
+import 'package:woynshet_taem/screens/payment/helocash.dart';
 
 import 'package:woynshet_taem/size_config.dart';
 import 'package:http/http.dart' as http;
@@ -62,9 +63,15 @@ class _BodyState extends State<Body> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Center(
-            child: Text(
-              "Your Cart",
-              style: TextStyle(color: Colors.black),
+            child: Consumer<Cart>(
+              builder: (context, cart, child) {
+                return cart.count == 0
+                    ? Text("Your Cart is Empty")
+                    : Text(
+                        "Your Cart has ${cart.count} items",
+                        style: TextStyle(color: Colors.black),
+                      );
+              },
             ),
           ),
           automaticallyImplyLeading: false,
@@ -185,8 +192,8 @@ class _BodyState extends State<Body> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Auth(
-                                              totalPrice: cart.totalPrice,
+                                        builder: (context) => Payment(
+                                              amount: cart.totalPrice,
                                             )));
                               },
                             );

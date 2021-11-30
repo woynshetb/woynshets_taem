@@ -6,16 +6,12 @@ import 'package:woynshet_taem/screens/accounts/guestAccount.dart';
 import 'package:woynshet_taem/screens/sign_in/sign_in_screen.dart';
 import 'package:woynshet_taem/screens/sign_up/sign_up_screen.dart';
 
-class Auth extends StatefulWidget {
-  final num totalPrice;
-
-  const Auth({this.totalPrice});
-
+class Authen extends StatefulWidget {
   @override
-  _AuthState createState() => _AuthState();
+  _AuthenState createState() => _AuthenState();
 }
 
-class _AuthState extends State<Auth> {
+class _AuthenState extends State<Authen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,12 +96,8 @@ class _AuthState extends State<Auth> {
               //               amount: widget.productPrice,
               //             )));
 
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => GuestAccount(
-                            total: widget.totalPrice,
-                          )));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => GuestAccount()));
             },
           ),
           //

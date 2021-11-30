@@ -6,7 +6,7 @@ import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/home/components/catagoriesTwo.dart';
 import 'package:woynshet_taem/screens/home/components/categoryPageFour.dart';
 import 'package:woynshet_taem/screens/home/components/categoryThree.dart';
-import 'package:woynshet_taem/screens/home/components/prduct_detail.dart';
+import 'package:woynshet_taem/screens/home/components/product_detail.dart';
 import 'package:woynshet_taem/screens/search.dart';
 //import 'package:woynshet_taem/screens/searchbytitle.dart';
 import 'catagories.dart';
