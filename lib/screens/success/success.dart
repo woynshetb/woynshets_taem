@@ -1,160 +1,177 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:woynshet_taem/components/default_button.dart';
-import 'package:woynshet_taem/constants.dart';
-import 'package:woynshet_taem/models/response.dart';
+import 'package:provider/provider.dart';
+
+import 'package:woynshet_taem/providers/getHistory.dart';
 import 'package:woynshet_taem/screens/home/home-screen.dart';
 import 'package:woynshet_taem/size_config.dart';
 
 class Success extends StatelessWidget {
-  final Future<Helo> futureHistory;
-  Success({this.futureHistory});
-
   @override
   Widget build(BuildContext context) {
     final key = new GlobalKey<ScaffoldState>();
     return Scaffold(
       key: key,
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: FutureBuilder<Helo>(
-          future: futureHistory,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(children: [
-                SizedBox(height: SizeConfig.screenHeight * 0.04),
-                Image.asset(
-                  "assets/images/purchase.png",
-                  height: SizeConfig.screenHeight * 0.25,
-                ),
-                SizedBox(height: SizeConfig.screenHeight * 0.04),
-                Text(
-                  "Congratulations",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: getProportionateScreenHeight(30),
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontFamily: "Overlock"),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "You Bill has been created Please Complete Your Payment at Lucy , Walya or Axum HelloCash agent or bank \n Check *912# or call 8807 for more Information ",
-                  style: TextStyle(
-                    fontSize: getProportionateScreenHeight(20),
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              SizedBox(height: SizeConfig.screenHeight * 0.04),
+              Image.asset(
+                "assets/images/purchase.png",
+                height: SizeConfig.screenHeight * 0.25,
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.04),
+              Text(
+                "Congratulations",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: getProportionateScreenHeight(30),
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
+                    fontFamily: "Overlock"),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "You Bill has been created Please Complete Your Payment at Lucy , Walya or Axum HelloCash agent or bank \n Check *912# or call 8807 for more Information ",
+                style: TextStyle(
+                  fontSize: getProportionateScreenHeight(20),
+                  color: Colors.black,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.center,
-                        child: Center(
-                          child: Container(
-                            width: 120,
-                            margin: const EdgeInsets.all(7.0),
-                            padding: const EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: const Color(0xffFFAC38), width: 3),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0))),
-                            child: SelectableText(
-                              snapshot.data.reference,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Center(
+                        child: Container(
+                          width: 120,
+                          margin: const EdgeInsets.all(7.0),
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: const Color(0xffFFAC38), width: 3),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          child: SelectableText(
+                            Provider.of<SingleResponse>(context)
+                                .single[0]
+                                .reference,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                       ),
-                      Align(
-                          alignment: Alignment.topCenter,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(color: Colors.white),
-                            child: Text('Reference Id '),
-                          )),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RaisedButton(
-                      onPressed: () {
-                        Clipboard.setData(
-                            new ClipboardData(text: snapshot.data.reference));
-                        key.currentState.showSnackBar(new SnackBar(
-                          content:
-                              new Text("Reference is  Copied to Clipboard"),
-                        ));
-                      },
-                      textColor: Colors.white,
-                      color: Color(0xfff063057),
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text("copy rreference id"),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
                     ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    RaisedButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, HomeScreen.routeName),
-                      textColor: Colors.white,
-                      color: Color(0xfff063057),
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text("Go home"),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
+                    Align(
+                        alignment: Alignment.topCenter,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Text('Reference Id '),
+                        )),
                   ],
                 ),
-                Expanded(
-                    child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: viewMoreButtons(
-                      "View Transaction Details",
-                      () => {
-                            showPowerBottomSheet(
-                              context,
-                              snapshot.data.expires,
-                              snapshot.data.reference,
-                              snapshot.data.status,
-                            )
-                          }),
-                ))
-              ]);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
               ),
-            );
-          },
-        ),
-      ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      Clipboard.setData(new ClipboardData(
+                          text: Provider.of<SingleResponse>(context)
+                              .single[0]
+                              .reference));
+                      key.currentState.showSnackBar(new SnackBar(
+                        content: new Text("Reference is  Copied to Clipboard"),
+                      ));
+                    },
+                    textColor: Colors.white,
+                    color: Color(0xfff063057),
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text("copy rreference id"),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  RaisedButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, HomeScreen.routeName),
+                    textColor: Colors.white,
+                    color: Color(0xfff063057),
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text("Go home"),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                  child: Align(
+                alignment: Alignment.bottomCenter,
+                child: viewMoreButtons(
+                    "View Transaction Details",
+                    () => {
+                          showPowerBottomSheet(
+                            context,
+                            Provider.of<SingleResponse>(context, listen: false)
+                                        .single
+                                        .length ==
+                                    0
+                                ? null
+                                : Provider.of<SingleResponse>(context,
+                                                listen: false)
+                                            .single
+                                            .length ==
+                                        0
+                                    ? null
+                                    : Provider.of<SingleResponse>(context,
+                                            listen: false)
+                                        .single[0]
+                                        .expires,
+                            Provider.of<SingleResponse>(context, listen: false)
+                                        .single
+                                        .length ==
+                                    0
+                                ? null
+                                : Provider.of<SingleResponse>(context,
+                                        listen: false)
+                                    .single[0]
+                                    .reference,
+                            Provider.of<SingleResponse>(context, listen: false)
+                                        .single
+                                        .length ==
+                                    0
+                                ? null
+                                : Provider.of<SingleResponse>(context,
+                                        listen: false)
+                                    .single[0]
+                                    .status,
+                          )
+                        }),
+              ))
+
+              // container
+            ],
+          )),
     );
-    ;
   }
 }
 
@@ -184,7 +201,7 @@ showPowerBottomSheet(BuildContext context, String expires, String reference,
                   listItemContainer("expires", expires),
                   listItemContainer("Transaction References", reference),
                   listItemContainer("Status", status),
-                  listItemContainer("Account Type", "Guest"),
+                  listItemContainer("Account Id", "Guest"),
                 ],
               ),
             ),

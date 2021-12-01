@@ -8,6 +8,7 @@ import 'package:woynshet_taem/components/default_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:woynshet_taem/models/response.dart';
 import 'package:woynshet_taem/providers/auth.dart';
+import 'package:woynshet_taem/providers/getHistory.dart';
 import 'package:woynshet_taem/screens/success/success.dart';
 
 class Payment extends StatefulWidget {
@@ -22,7 +23,6 @@ class Payment extends StatefulWidget {
 var today = DateTime.now();
 var rng = new Random();
 var code = rng.nextInt(900000) + 100000;
-Future<Helo> futureHistory;
 
 TextEditingController phoneNumberTextEditingController =
     TextEditingController();
@@ -37,6 +37,7 @@ belchashPayment(
     "description": "Payment for products in $date ",
     "amount": amount
   });
+
   request.headers.addAll(headers);
 
   var streamedResponse = await request.send();
@@ -51,6 +52,7 @@ belchashPayment(
     print("yessss");
 
     (jsonDecode(response.body));
+    return decode;
   } else {
     print("whyy is");
     print(response.reasonPhrase);
@@ -69,16 +71,26 @@ class _PaymentState extends State<Payment> {
           children: [
             DefaultButton(
               text: "Confirm Order",
-              press: () {
+              press: () async {
                 print(today.add(Duration(days: 3)));
 
-                belchashPayment(
+                var decode = await belchashPayment(
                     widget.amount,
                     "${Provider.of<Auth>(context, listen: false).user[0].phoneNumber}",
                     today.add(Duration(days: 3)),
                     code.toString());
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Success()));
+                print(decode);
+                print(decode['status']);
+                String status = decode['status'];
+                String expires = decode['expires'];
+                String reference = decode['reference'];
+                Provider.of<SingleResponse>(context, listen: false).addHistory(
+                    status: status, expires: expires, reference: reference);
+
+                decode['status'] != null
+                    ? Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Success()))
+                    : CircularProgressIndicator();
               },
             )
           ],

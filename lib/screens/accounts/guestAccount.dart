@@ -220,12 +220,6 @@ class _GuestAccountState extends State<GuestAccount> {
                               phoneNumberTextEditingController.text,
                               today.add(Duration(days: 3)),
                               code.toString());
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Success(
-                                        futureHistory: futureHistory,
-                                      )));
                         },
                       ),
                     ],
