@@ -29,25 +29,21 @@ var code = rng.nextInt(900000) + 100000;
 TextEditingController phoneNumberTextEditingController =
     TextEditingController();
 
-helocash(num amount, String phonenumber, DateTime date, String randomT) async {
+helocash(
+    num amount, String phonenumber, DateTime date, String randomT, r) async {
   var headers = {'Content-Type': 'application/json'};
-  var request = http.Request(
-      'POST', Uri.parse('https://woynshetstaem.herokuapp.com/orders'));
-  request.body = json.encode({
+  final url = Uri.parse('https://woynshetstaem.herokuapp.com/orders');
+
+  Map payload = {
     "userPhoneNumber": phonenumber,
     "payWith": "Helocash",
     "totalPrice": amount,
-    "products": [
-      {"productId": 1221, "name": "mitmittta", "price": 200},
-      {"productId": 1221, "name": "mitmittta", "price": 200},
-      {"productId": 1221, "name": "mitmittta", "price": 200}
-    ],
+    "productsId": r.toString(),
     "description": "for the product"
-  });
-  request.headers.addAll(headers);
+  };
 
-  var streamedResponse = await request.send();
-  var response = await http.Response.fromStream(streamedResponse);
+  final response =
+      await http.post(url, headers: headers, body: json.encode(payload));
 
   if (response.statusCode == 200) {
     var decode = jsonDecode(response.body);
@@ -91,17 +87,52 @@ class _PaymentState extends State<Payment> {
                 //     ? Navigator.push(context,
                 //         MaterialPageRoute(builder: (context) => Success()))
                 //     : CircularProgressIndicator();
+
                 List productList =
                     Provider.of<Cart>(context, listen: false).basketitem;
                 print(productList.length);
 
-                // print(Provider.of<Cart>(context, listen: false).basketitem);
+                var list = List<Item>.generate(
+                    productList.length,
+                    (index) => Item(productList[index].ProductId,
+                        productList[index].price, productList[index].title));
 
-                helocash(
+                var r = list
+                    .map(
+                      (e) => e.ProductId,
+                    )
+                    .toList();
+                print(r);
+
+// this is new
+                // List<Item> allProduct =
+                //     Provider.of<Cart>(context, listen: false).basketitem;
+                // print(jsonEncode(allProduct));
+
+                // new
+                //  var r = list.map((e) => {e.ProductId, e.title, e.price});
+
+                await helocash(
                     widget.amount,
                     "${Provider.of<Auth>(context, listen: false).user[0].phoneNumber}",
                     today.add(Duration(days: 3)),
-                    code.toString());
+                    code.toString(),
+                    r);
+
+                // Map<String, String> data;
+
+                // for (int i = 0; i < productList.length; i++) {
+                //   data.addAll(
+                //     {"productId": productList[i].ProductId},
+                //   );
+                //   data.addAll(
+                //     {"name": productList[i].title},
+                //   );
+                //   data.addAll(
+                //     {"price": productList[i].price},
+                //   );
+                // }
+                // print(data);
               },
             )
           ],
