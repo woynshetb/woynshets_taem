@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:woynshet_taem/components/search_box.dart';
+
 import 'package:woynshet_taem/constants.dart';
 import 'package:woynshet_taem/screens/home/components/catagoriesTwo.dart';
 import 'package:woynshet_taem/screens/home/components/categoryPageFour.dart';
