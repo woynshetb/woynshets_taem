@@ -8,10 +8,8 @@ import 'package:woynshet_taem/components/default_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:woynshet_taem/models/cart.dart';
 import 'package:woynshet_taem/models/item.dart';
-import 'package:woynshet_taem/models/response.dart';
+
 import 'package:woynshet_taem/providers/auth.dart';
-import 'package:woynshet_taem/providers/getHistory.dart';
-import 'package:woynshet_taem/screens/success/success.dart';
 
 class Payment extends StatefulWidget {
   final num amount;
