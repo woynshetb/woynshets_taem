@@ -7,6 +7,7 @@ import 'package:woynshet_taem/screens/authenticate/auth.dart';
 import 'package:woynshet_taem/screens/carts/cart_screen.dart';
 import 'package:woynshet_taem/screens/home/components/app_bar.dart';
 import 'package:woynshet_taem/screens/home/components/body.dart';
+import 'package:woynshet_taem/screens/notification/orderHistory.dart';
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import '../../providers/auth.dart';
 
@@ -46,7 +47,63 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: homeAppBar(context),
       // implement drawer
-      drawer: Drawer(child: Container()),
+      drawer: Drawer(
+          child: ListView(children: [
+        DrawerHeader(
+          child: CircleAvatar(
+            radius: 12,
+            backgroundImage: AssetImage("assets/images/profilee.png"),
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.person),
+          title: Provider.of<Auth>(context).user.isEmpty
+              ? null
+              : Text(Provider.of<Auth>(context).user[0].name),
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 43),
+          height: 35,
+          decoration: BoxDecoration(
+              color: Color(0xfff5f6f9),
+              borderRadius: BorderRadius.circular(15)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return OrderHistory();
+                  }));
+                },
+                icon: Icon(
+                  Icons.notifications,
+                  size: 26,
+                  color: kPrimaryColor,
+                ),
+              ),
+              SizedBox(
+                width: 40,
+              ),
+              Expanded(
+                child: Text(
+                  "Order History",
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+              ),
+              // IconButton(
+              //     icon: Icon(
+              //       icon,
+              //       color: Color(0xfff5f6f9),
+              //     ),
+              //     onPressed: () {})
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+      ])),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
