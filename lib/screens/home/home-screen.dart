@@ -55,53 +55,130 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundImage: AssetImage("assets/images/profilee.png"),
           ),
         ),
-        ListTile(
-          leading: Icon(Icons.person),
-          title: Provider.of<Auth>(context).user.isEmpty
-              ? null
-              : Text(Provider.of<Auth>(context).user[0].name),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 43),
-          height: 35,
-          decoration: BoxDecoration(
-              color: Color(0xfff5f6f9),
-              borderRadius: BorderRadius.circular(15)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return OrderHistory();
-                  }));
-                },
-                icon: Icon(
-                  Icons.notifications,
-                  size: 26,
+        TextButton(
+          onPressed: () {},
+          child: Container(
+            height: 45,
+            decoration: BoxDecoration(
+                color: Color(0xfff5f6f9),
+                borderRadius: BorderRadius.circular(15)),
+            child: Container(
+              child: ListTile(
+                leading: Icon(
+                  Icons.person,
                   color: kPrimaryColor,
                 ),
+                title: Provider.of<Auth>(context).user.isEmpty
+                    ? Text(
+                        "Name",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      )
+                    : Text(
+                        Provider.of<Auth>(context).user[0].name,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
               ),
-              SizedBox(
-                width: 40,
-              ),
-              Expanded(
-                child: Text(
-                  "Order History",
-                  style: TextStyle(color: Colors.black, fontSize: 20),
-                ),
-              ),
-              // IconButton(
-              //     icon: Icon(
-              //       icon,
-              //       color: Color(0xfff5f6f9),
-              //     ),
-              //     onPressed: () {})
-            ],
+            ),
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 30,
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return OrderHistory();
+            }));
+          },
+          child: Container(
+            height: 45,
+            decoration: BoxDecoration(
+                color: Color(0xfff5f6f9),
+                borderRadius: BorderRadius.circular(15)),
+            child: Container(
+              child: ListTile(
+                leading: Icon(
+                  Icons.notifications,
+                  color: kPrimaryColor,
+                ),
+                title: Text(
+                  "Order History",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return OrderHistory();
+            }));
+          },
+          child: Container(
+            height: 45,
+            decoration: BoxDecoration(
+                color: Color(0xfff5f6f9),
+                borderRadius: BorderRadius.circular(15)),
+            child: Container(
+              child: ListTile(
+                leading: Icon(
+                  Icons.settings,
+                  color: kPrimaryColor,
+                ),
+                title: Text(
+                  "Setting",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return OrderHistory();
+            }));
+          },
+          child: Container(
+            height: 45,
+            decoration: BoxDecoration(
+                color: Color(0xfff5f6f9),
+                borderRadius: BorderRadius.circular(15)),
+            child: Container(
+              child: ListTile(
+                leading: Icon(
+                  Icons.help,
+                  color: kPrimaryColor,
+                ),
+                title: Text(
+                  "Customer Service",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ])),
       bottomNavigationBar: BottomNavigationBar(
