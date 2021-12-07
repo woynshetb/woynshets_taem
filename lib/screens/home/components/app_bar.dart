@@ -27,14 +27,5 @@ AppBar homeAppBar(BuildContext context) {
         ],
       ),
     ),
-    actions: <Widget>[
-      IconButton(
-        icon: Icon(Icons.info_outline),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => OrderHistory()));
-        },
-      ),
-    ],
   );
 }
