@@ -61,9 +61,7 @@ class Success extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
                           child: SelectableText(
-                            Provider.of<SingleResponse>(context)
-                                .single[0]
-                                .reference,
+                            "reference",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -123,52 +121,50 @@ class Success extends StatelessWidget {
                   ),
                 ],
               ),
-              Expanded(
-                  child: Align(
-                alignment: Alignment.bottomCenter,
-                child: viewMoreButtons(
-                    "View Transaction Details",
-                    () => {
-                          showPowerBottomSheet(
-                            context,
-                            Provider.of<SingleResponse>(context, listen: false)
-                                        .single
-                                        .length ==
-                                    0
-                                ? null
-                                : Provider.of<SingleResponse>(context,
-                                                listen: false)
-                                            .single
-                                            .length ==
-                                        0
-                                    ? null
-                                    : Provider.of<SingleResponse>(context,
-                                            listen: false)
-                                        .single[0]
-                                        .expires,
-                            Provider.of<SingleResponse>(context, listen: false)
-                                        .single
-                                        .length ==
-                                    0
-                                ? null
-                                : Provider.of<SingleResponse>(context,
-                                        listen: false)
-                                    .single[0]
-                                    .reference,
-                            Provider.of<SingleResponse>(context, listen: false)
-                                        .single
-                                        .length ==
-                                    0
-                                ? null
-                                : Provider.of<SingleResponse>(context,
-                                        listen: false)
-                                    .single[0]
-                                    .status,
-                          )
-                        }),
-              ))
-
-              // container
+              // Expanded(
+              //     child: Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: viewMoreButtons(
+              //       "View Transaction Details",
+              //       () => {
+              //             showPowerBottomSheet(
+              //               context,
+              //               Provider.of<SingleResponse>(context, listen: false)
+              //                           .single
+              //                           .length ==
+              //                       0
+              //                   ? null
+              //                   : Provider.of<SingleResponse>(context,
+              //                                   listen: false)
+              //                               .single
+              //                               .length ==
+              //                           0
+              //                       ? null
+              //                       : Provider.of<SingleResponse>(context,
+              //                               listen: false)
+              //                           .single[0]
+              //                           .expires,
+              //               Provider.of<SingleResponse>(context, listen: false)
+              //                           .single
+              //                           .length ==
+              //                       0
+              //                   ? null
+              //                   : Provider.of<SingleResponse>(context,
+              //                           listen: false)
+              //                       .single[0]
+              //                       .reference,
+              //               Provider.of<SingleResponse>(context, listen: false)
+              //                           .single
+              //                           .length ==
+              //                       0
+              //                   ? null
+              //                   : Provider.of<SingleResponse>(context,
+              //                           listen: false)
+              //                       .single[0]
+              //                       .status,
+              //             )
+              //           }),
+              // ))
             ],
           )),
     );
