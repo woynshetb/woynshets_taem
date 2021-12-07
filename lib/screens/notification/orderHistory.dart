@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:woynshet_taem/constants.dart';
+import 'package:woynshet_taem/providers/auth.dart';
 import 'package:woynshet_taem/screens/notification/allOrder.dart';
 
 import 'package:woynshet_taem/screens/notification/pendingOrder.dart';
@@ -64,21 +66,35 @@ class _OrderHistoryState extends State<OrderHistory>
                 ],
               ),
             ),
-            Container(
-              // height to be edited
-              height: MediaQuery.of(context).size.height - 40,
+            Provider.of<Auth>(context).user.isEmpty
+                ? Container(
+                    height: MediaQuery.of(context).size.height - 220,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        "Empty",
+                        style: TextStyle(
+                            fontFamily: "Kiros",
+                            color: Colors.black,
+                            fontSize: 30),
+                      ),
+                    ),
+                  )
+                : Container(
+                    // height to be edited
+                    height: MediaQuery.of(context).size.height - 40,
 
-              width: double.infinity,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  // can change the screen
-                  AllOrder(),
-                  Pending(),
-                  Processed(),
-                ],
-              ),
-            ),
+                    width: double.infinity,
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        // can change the screen
+                        AllOrder(),
+                        Pending(),
+                        Processed(),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),
