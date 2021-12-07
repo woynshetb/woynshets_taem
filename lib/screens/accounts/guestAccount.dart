@@ -1,17 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:woynshet_taem/Widgets/customTextField.dart';
 import 'package:woynshet_taem/components/default_button.dart';
 import 'package:woynshet_taem/models/response.dart';
 import 'package:woynshet_taem/providers/auth.dart';
-import 'package:woynshet_taem/screens/notification/history.dart';
-import 'package:woynshet_taem/screens/profile/profilePage.dart';
-import 'package:woynshet_taem/screens/success/success.dart';
-import 'package:woynshet_taem/size_config.dart';
 
 class GuestAccount extends StatefulWidget {
   final num total;
@@ -72,7 +66,8 @@ guestCreation(String phoneNumber) async {
     print(jsonDecode(responseString.body));
     var respo = await json.decode(responseString.body);
     print(respo);
-  } catch (exception) {} finally {}
+  } catch (exception) {
+  } finally {}
 }
 
 class _GuestAccountState extends State<GuestAccount> {
@@ -90,7 +85,7 @@ class _GuestAccountState extends State<GuestAccount> {
                 SizedBox(
                   height: 200,
                 ),
-                Text("Summary",
+                Text("Guest Accout ",
                     style: TextStyle(
                         fontFamily: "Kiros",
                         fontSize: 30,
@@ -98,27 +93,8 @@ class _GuestAccountState extends State<GuestAccount> {
                 SizedBox(
                   height: 30,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Total Price",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Text(
-                      widget.total.toString() + " Birr",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
                 Text(
-                  "Enter Your Phone  Number to Complete Your Checkout",
+                  "Enter Your Mobile Number to Process Your Checkout",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -161,65 +137,17 @@ class _GuestAccountState extends State<GuestAccount> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Pay With ",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: "Kiros",
-                            fontWeight: FontWeight.w900),
-                      ),
                       Consumer<Auth>(
                         builder: (context, auth, child) {
-                          return IconButton(
-                            icon: Image.asset('assets/images/helo.png'),
-                            iconSize: 50,
-                            onPressed: () {
+                          return DefaultButton(
+                            text: "Register",
+                            press: () {
                               print("this is texy");
                               print(number);
                               auth.guestCreation(number);
                               Navigator.pop(context);
-                              // should be the same for all users
-
-                              // futureHistory = belchashPayment(
-                              //     widget.total,
-                              //     phoneNumberTextEditingController.text,
-                              //     today.add(Duration(days: 3)),
-                              //     code.toString());
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Success(
-                              //               futureHistory: futureHistory,
-                              //             )));
                             },
                           );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 70,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Pay With ",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: "Kiros",
-                            fontWeight: FontWeight.w900),
-                      ),
-                      IconButton(
-                        icon: Image.asset('assets/images/mama.jpg'),
-                        iconSize: 100,
-                        onPressed: () {
-                          guestCreation(phoneNumberTextEditingController.text);
-                          futureHistory = belchashPayment(
-                              widget.total,
-                              phoneNumberTextEditingController.text,
-                              today.add(Duration(days: 3)),
-                              code.toString());
                         },
                       ),
                     ],
