@@ -10,6 +10,8 @@ import 'package:woynshet_taem/screens/home/components/body.dart';
 import 'package:woynshet_taem/screens/notification/orderHistory.dart';
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import '../../providers/auth.dart';
+import 'package:ussd_service/ussd_service.dart';
+import 'package:sim_data/sim_data.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
@@ -40,6 +42,28 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  subscriptionId() async {
+    try {
+      SimData simData = await SimDataPlugin.getSimData();
+
+      print(simData);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  makeMyRequest() async {
+    int subscriptionId = 1;
+    String code = "*912#";
+    try {
+      String ussdResonseMessage = await UssdService.makeRequest(
+          subscriptionId, code, Duration(seconds: 10));
+      print(ussdResonseMessage);
+    } catch (err) {
+      debugPrint(err);
+    }
   }
 
   @override
@@ -123,9 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         TextButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return OrderHistory();
-            }));
+            subscriptionId();
           },
           child: Container(
             height: 45,

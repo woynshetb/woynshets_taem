@@ -85,7 +85,7 @@ class _GuestAccountState extends State<GuestAccount> {
                 SizedBox(
                   height: 200,
                 ),
-                Text("Guest Accout ",
+                Text("Guest Account ",
                     style: TextStyle(
                         fontFamily: "Kiros",
                         fontSize: 30,
@@ -122,7 +122,7 @@ class _GuestAccountState extends State<GuestAccount> {
                         color: Colors.orange,
                       ),
                       focusColor: Colors.orange,
-                      hintText: 'enter ohone number',
+                      hintText: 'enter Phone number',
                     ),
                     onChanged: (value) {
                       number = value;

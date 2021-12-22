@@ -66,7 +66,7 @@ class _UploadState extends State<Upload> {
                 child: Text("Cancel"),
                 onPressed: () {
                   Navigator.pop(context);
-                },
+                }
               ),
             ],
           );
