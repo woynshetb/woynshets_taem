@@ -12,6 +12,9 @@ import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import '../../providers/auth.dart';
 import 'package:ussd_service/ussd_service.dart';
 import 'package:sim_data/sim_data.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:ussd_advanced/ussd_advanced.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
@@ -48,21 +51,24 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       SimData simData = await SimDataPlugin.getSimData();
 
-      print(simData);
-    } catch (err) {
-      throw err;
+      for (var s in simData.cards) {
+        print('Serial number: ${s.subscriptionId}');
+      }
+
+      return subscriptionId;
+    } catch (e) {
+      debugPrint("error! code: ${e.code} - message: ${e.message}");
     }
   }
 
   makeMyRequest() async {
-    int subscriptionId = 1;
+    int subscriptionId = 2;
     String code = "*912#";
+
     try {
-      String ussdResonseMessage = await UssdService.makeRequest(
-          subscriptionId, code, Duration(seconds: 10));
-      print(ussdResonseMessage);
+      UssdAdvanced.sendUssd(code: "*912", subscriptionId: 2);
     } catch (err) {
-      debugPrint(err);
+      debugPrint(err.toString());
     }
   }
 
@@ -146,9 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 30,
         ),
         TextButton(
-          onPressed: () {
-            subscriptionId();
-          },
+          onPressed: () async {},
           child: Container(
             height: 45,
             decoration: BoxDecoration(
@@ -175,10 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 30,
         ),
         TextButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return OrderHistory();
-            }));
+          onPressed: () async {
+            await UrlLauncher.launch("tel://912");
           },
           child: Container(
             height: 45,

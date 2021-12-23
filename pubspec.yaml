@@ -39,10 +39,17 @@ dependencies:
   url_launcher: ^6.0.17
   ussd_service: ^0.1.1
   sim_data: ^0.0.2
+  flutter_launcher_icons: ^0.9.2
+  permission_handler: ^8.3.0
+  ussd_advanced: ^0.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
