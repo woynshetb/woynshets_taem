@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               child: ListTile(
                 leading: Icon(
-                  Icons.help,
+                  Icons.phone,
                   color: kPrimaryColor,
                 ),
                 title: Text(
