@@ -218,18 +218,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "permission_handler",
-      "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-8.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "permission_handler_platform_interface",
-      "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_platform_interface-3.7.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
       "name": "petitparser",
       "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/petitparser-4.4.0",
       "packageUri": "lib/",
@@ -304,12 +292,6 @@
     {
       "name": "shared_preferences_windows",
       "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_windows-2.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "sim_data",
-      "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/sim_data-0.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -422,12 +404,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "ussd_service",
-      "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/ussd_service-0.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "vector_math",
       "rootUri": "file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.1.1",
       "packageUri": "lib/",
@@ -464,7 +440,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-12-23T14:11:52.695492Z",
+  "generated": "2021-12-24T06:12:24.645842Z",
   "generator": "pub",
   "generatorVersion": "2.15.0-268.18.beta"
 }

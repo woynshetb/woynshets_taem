@@ -10,9 +10,7 @@ import 'package:woynshet_taem/screens/home/components/body.dart';
 import 'package:woynshet_taem/screens/notification/orderHistory.dart';
 import 'package:woynshet_taem/screens/profile/profilePage.dart';
 import '../../providers/auth.dart';
-import 'package:ussd_service/ussd_service.dart';
-import 'package:sim_data/sim_data.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 import 'package:ussd_advanced/ussd_advanced.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -45,20 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  subscriptionId() async {
-    try {
-      SimData simData = await SimDataPlugin.getSimData();
-
-      for (var s in simData.cards) {
-        print('Serial number: ${s.subscriptionId}');
-      }
-
-      return subscriptionId;
-    } catch (e) {
-      debugPrint("error! code: ${e.code} - message: ${e.message}");
-    }
   }
 
   makeMyRequest() async {

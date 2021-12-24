@@ -130,14 +130,6 @@ path_provider_windows
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-2.0.4/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-2.0.4/lib/
-permission_handler
-2.12
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-8.3.0/
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-8.3.0/lib/
-permission_handler_platform_interface
-2.14
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_platform_interface-3.7.0/
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_platform_interface-3.7.0/lib/
 petitparser
 2.14
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/petitparser-4.4.0/
@@ -190,10 +182,6 @@ shared_preferences_windows
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_windows-2.0.3/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_windows-2.0.3/lib/
-sim_data
-2.12
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/sim_data-0.0.2/
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/sim_data-0.0.2/lib/
 smooth_star_rating
 2.7
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/smooth_star_rating-1.1.1/
@@ -262,10 +250,6 @@ ussd_advanced
 2.12
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/ussd_advanced-0.1.2/
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/ussd_advanced-0.1.2/lib/
-ussd_service
-2.12
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/ussd_service-0.1.1/
-file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/ussd_service-0.1.1/lib/
 vector_math
 2.14
 file:///C:/Source/flutter/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.1.1/
