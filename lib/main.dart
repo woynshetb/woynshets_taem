@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'package:woynshet_taem/models/cart.dart';
 import 'package:woynshet_taem/models/user.dart';
 import 'package:woynshet_taem/providers/auth.dart';
@@ -24,9 +25,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Woynshet taste',
         theme: theme(),
-        initialRoute: SplashScreen.routeName,
+        initialRoute: SplashScreens.routeName,
         routes: routes,
       ),
     );

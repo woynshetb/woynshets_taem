@@ -12,7 +12,7 @@ import 'package:woynshet_taem/screens/sign_up/sign_up_screen.dart';
 import 'package:woynshet_taem/screens/splash/splash.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  SplashScreen.routeName: (context) => SplashScreen(),
+  SplashScreens.routeName: (context) => SplashScreens(),
   SignInScreen.routeName: (context) => SignInScreen(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   LoginSuccessScreen.routeName: (context) => LoginSuccessScreen(),
